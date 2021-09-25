@@ -38,6 +38,7 @@ Here is a simple guide on how to work this.
 3) On the left is a list of subdirectories
 4) On the right, is the content viewer, where you can view your files
 5) On the top is the name of the file
+6) See [Commands](#Commands) to interact with the files
 
 ## Usage
 
