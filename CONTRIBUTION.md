@@ -49,25 +49,30 @@ Examples:
 
 ###### Command Explanations
 
-`J/K` : Changing images is one of the primary movements and the users hand should remain on the home row.
+Key | Command | Explanation
+--- | --- | ---
 
-`WASD`: Move around an image, as well as using `A/D` to scroll through a video and `W/S` to scroll through a pdf and `A/D` to change pdf pages. These all stem from the standard `WASD` directional movement. I think this is intuitive enough for people to figure out.
+`J/K` | Up/Down | Changing images is one of the primary movements and the users hand should remain on the home row.
 
-`R` : Rename. `R` and if someone is familiar with `WASD` it would be the same as the "Reload" control.
+`WASD`| Move around | Move in an image, as well as using `A/D` to scroll through a video and `W/S` to scroll through a pdf and `A/D` to change pdf pages. These all stem from the standard `WASD` directional movement. I think this is intuitive enough for people to figure out.
 
-`I/O` : Zoom in/out. Expl: "In" and "Out" start with `I/O` and the keys are right beside eachother and near `J/K`
+`R` | Rename | `R` and if someone is familiar with `WASD` it would be the same as the "Reload" control. Same for directories when in directory view.
 
-`U` : Undo. Expl:Starts with `U`.  It's also near `J/K/I/O`. `Shift+U` for undo I don't like that much but I think it's fine. Just don't make mistakes.
+`I/O` | Zoom in/out | "In" and "Out" start with `I/O` and the keys are right beside eachother and near `J/K`
 
-`Z` : Mute. Expl: `Z` for "Zip it"
+`U` | Undo | Starts with `U`.  It's also near `J/K/I/O`. `Shift+U` for undo I don't like that much but I think it's fine. Just don't make mistakes.
 
-`/` : Open Directory. Expl: `/` denotes a directory.
+`Z` | Mute | `Z` for "Zip it"
 
-`.` : Up a directory. Expl: In the terminal `..` is up a directory.
+`/` | Open Directory | `/` denotes a directory. Near `.`
 
-`N/M` : New Directory and Move File/Directory. Expl: Both are next to eachother and both activate the directory pane on the left and both start with the right letter.
+`.` | Up a directory | In the terminal `..` is up a directory. Near `/`
 
-`P` : Open in default "P"rogram
+`N` | New Directory | New starts with `N`. Near `M` and both activate the Directory Pane
+
+`N` | Move File/Directory | Move starts with `M`. Near `N` and both activate the Directory Pane
+
+`P` | Open in default | Uses default `P`rogram to open the file
 
 ### Permissions
 
