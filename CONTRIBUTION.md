@@ -76,133 +76,34 @@ The one thing that I absolutely positively definitely will not do myself is [cha
 
 I have a few long term goals that I would like to set out for this application. I say this to get hype for the program as well as to explain why certain decisions have been made for the application.
 
+If anyone would like to implement any of these, feel free.
+
 ### Speedy Confirmation Dialogs
 
-This needs to be some sort of way for users to easily select from multiple options. The example is for the filter viiew selection.
-- Dialog with multiple options that can be set to specific keys
-- Should look decently nice
-- Should be able to handle shift keys as well that modify the dialog
+[Issue #19](https://github.com/syftking/syft/issues/19)
 
 ### Preview Pane
 
-There needs to be an optional pane across the bottom which is not very tall. Way to preview items before you scroll to them.
-- Sideways listview of items where each item is a portrait of the file with the filename beneath it
-- The current item should either always be on the right side or always in the center.
-- The Preview Pane should key off of the sorting in the organizer. It should also have visible sorting options that change the organizers sort method
-- `Y` can be the hotkey to sort (looks like a filter) [Sneedy Confirmation Dialog](#Speedy-Confirmation-Dialogs)
-  - `S` sort by size
-  - `D` sort by date
-  - `F` sort by filetype
-  - `Shift+KEY` sort descending (ascending by default)
+[Issue #13](https://github.com/syftking/syft/issues/13)
 
 ### Group Actions
 
-There should be a way for group actions. The behavior should be as follows
-- `G` select/deselects current file
-- All selected files should be highlighted in the [Preview Pane](#Preview-Pane)
-- Actions should apply to all items
-  - Move
-  - Delete (Maybe don't support so people don't accidently nuke their folders? Or always show warning)
-  - Rename (Rename group to `filename_1.png`, `filename_2.png`, `filename_3.png`)
+[Issue #14](https://github.com/syftking/syft/issues/14)
 
 ### Hot Keys
 
-I want to have programmable hot keys `0-9`. Would have limited functionality at first.
-- There could also be some sort of "leader" key, perhaps `,`. Then you could hotkey `A-Z,0-9`
-  - Would really only be necessary once scripting is in place
+[Issue #15](https://github.com/syftking/syft/issues/15)
 
-Hotkey actions:
-- Move file to specific directory (ie. 1 ALWAYS moves to /path/to/meme/folder)
-- [Scripting](#Scripting)
 
 ### Text Support
 
-There should be a way to read text files. It should be inactive but the user should be able to highlight the text.
-`C` - Copy Text (Don't just go ahead and do this. We may want `C` to be used for copying entire files but I'm not totally sure we need that in Syft)
-`E` - Edit text
+[Issue #16](https://github.com/syftking/syft/issues/16)
 
 ### PDF Support
 
-There should be a way to read PDFs in this. May be able to use the webview already.
-`W/S` - Scroll Down
-`A/D` - Change Pages
+[Issue #17](https://github.com/syftking/syft/issues/17)
 
 ### Tag Database
 
-The purpose of this is to be able to tag certain files with certain tags and be able to search your files for the tags.
-The reasoning is perhaps you have two meme folders, `baseball`, and `funny`.
-The meme you've saved is particularly funny, but it also has a baseball pun in it.
-You do not know where to save this meme, because ostensibly the purpose of saving a meme is to retrieve it later, and you want to be sure you have it.
-##### Solution: Tag the meme with `baseball` and `funny` so you will always be able to find it.
+[Issue #18](https://github.com/syftking/syft/issues/18)
 
-
-##### Workflow
-- Type `T` to open tag pane for certain file
-- Type tag and press `Enter` to add the tag
-  - `T` opens pane with a text edit that allows you to enter a single tag and closes with `Enter`
-  - `Shift+T` opens a larger pane that displays current tags for the file and allows you to enter multiple tags. Closes with `Esc`
-  - `?` Opens a pane pops up and as I type, it populates out the files that either contain a tag of what I'm typing or is named what I'm typing.
-    - `Enter` Ends search and enters results list
-      - `J/K` Highlight Next/Previous file
-        - `Enter` Move to file location
-
-You would need a few tables
-
-##### File
-Field | Type
---- | ---
-id | INT
-filename | STR
-hash_id | INT
-
-##### Hash
-Field | Type
---- | ---
-id | INT
-hash | STRI
-
-##### Tag
-Field | Type
---- | ---
-id | INT
-tag | STR
-
-##### TagConnection
-Field | Type
---- | ---
-id | INT
-file_id | INT
-tag_id | INT
-
-###### Note: Hash should not be utilized for text/code files.
-They could be modified outside of Syft and then they would change. Therefore file movements may not be detected for txt files. Before adding a text file tag, there could be a warning that says something like:
-
-```
-Syft identifies tags by analyzing the content and names of the files. If you tag this file, the tags will only be recognized in the future if you:
-- Do not modify the file contents
-- Do not move or rename the file
-```
-
-##### File detection
-
-For the issues that would inevitably arise from an ever-changing filesystem there would need to be a detection program that figures out what files are what files each time syft starts up.
-This would necessitate some sort of scanning functionality that would need to happen in the background each time syft starts up.
-We would want this to take as little time as possible, so only files that are tagged should be added to the database to reduce reduntant entries.
-
-The process should be this
-- For each file
-  - Check that path exists
-    - Yes: Check that hash is correct (might not be necessary)
-    - No: Store Hash and File ID -> NOT_EXISTS
-- For each Hash and File ID in NOT_EXISTS
-  - Need to find a way to identify existing files
-  - Phase 1: Directory Search
-    - Get all filenames from the database
-    - Get the directories the files are in (no duplicates)
-    - Check each file against Hash in NOT_EXISTS (probably not worth checking if it's already in the DB, would take more time)
-      - Match: Change the `filename` for the `file_id` that matches the hash in the DB
-  - Phase 3: Subdirectory Search
-    - Get directories from Phase 1
-    - Search all subdirectories that haven't already been searched in the same way as Phase 1
-    
-    
