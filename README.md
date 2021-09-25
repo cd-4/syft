@@ -55,7 +55,7 @@ Here is a simple guide on how to work this.
 The usages was designed to be effective once you know how to use it. Some commands are only applicable to Images, some are only applicable to Videos.
 
 ###### Note:
-- Do not click anywhere in the Content Viewer. You will not be able to change files afterwards. If you click there, simply click outside of the content view inside the window and it should revert back to normal. [See Issue #4](https://github.com/syftking/syft/issues/4)
+- Do not click anywhere in the Content Viewer. You will not be able to change files afterwards viewing a video file (not webm). If you click there, simply click outside of the content view inside the window and it should revert back to normal. [See Issue #4](https://github.com/syftking/syft/issues/4)
 
 - Webm files do not yet support scrubbing and restarting. Simply change files to restart [See Issue #5](https://github.com/syftking/syft/issues/5)
 
