@@ -94,6 +94,7 @@ Key | Action
 `M` | Move [Enters Directory View]
 `Delete/Backspace` | Delete File [Warning Dialog. Cannot be undone]
 `P` | Open file in default program
+`Space` | Start/Pause Video
 
 
 
