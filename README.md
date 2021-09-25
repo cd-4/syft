@@ -1,5 +1,5 @@
 # syft
-A program for optimal file browsing, movement, and renaming.
+A program for optimal file browsing, renaming, and movement.
 
 ##### Welcome
 This was designed out of necessity, since my meme folder was becoming unwieldy. For that reason, there isn't much fluff on the program.
