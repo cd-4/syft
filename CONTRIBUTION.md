@@ -5,6 +5,7 @@ Contents:
 - [Development](#Development)
   - [Priorities](#Priorities)
     - [Efficiency](#Efficiency)
+    - [C++](#C++)
     - [Understandability](#Understandability)
       - [Command Explanations](#Command-Explanations)
   - [Feature Ideas](#Feature-Ideas)
@@ -37,6 +38,8 @@ Obviously larger things like the [Tag DB](#Tag-Database) would need to take thes
 
 ##### C++
 I want at least all of the GUI and logic to be written in C++. I don't want any new widgets to be created with pyqt or something like that. C++ is already annoying enough to compile on it's own, let alone with Qt, and then adding more stuff just adds to the problem. I understand you can likely just modify the .pro but I everyone needs to install a bunch of new packages on their computer. We can do most of the things we need within C++/Qt.
+
+In addition, I'd prefer if all views were created dynamically like how they're currently done as opposed to using some sort of `.ui` qt file. I've never used them and I don't know enough about them and I'd rather stay away.
 
 ##### Understandability
 Despite having many different commands for different files, I want there to be some sense of consistency in the commands, and some commands may need to be re-assessed. I like each command to have a 1-step logical jump to the command. It may sound dumb but it works.
