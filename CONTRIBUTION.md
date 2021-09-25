@@ -92,7 +92,7 @@ There needs to be an optional pane across the bottom which is not very tall. Way
 - Sideways listview of items where each item is a portrait of the file with the filename beneath it
 - The current item should either always be on the right side or always in the center.
 - The Preview Pane should key off of the sorting in the organizer. It should also have visible sorting options that change the organizers sort method
-- `Y` can be the hotkey to sort (looks like a filter) [Dialog](#Speedy-Confirmation-Dialogs)
+- `Y` can be the hotkey to sort (looks like a filter) [Sneedy Confirmation Dialog](#Speedy-Confirmation-Dialogs)
   - `S` sort by size
   - `D` sort by date
   - `F` sort by filetype
