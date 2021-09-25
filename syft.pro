@@ -17,6 +17,8 @@ CONFIG += static
 CONFIG += link_pkgconfig
 #PKGCONFIG += QtGStreamer
 
+TARGET = Syft
+
 
 LIBS += -framework AppKit -framework QuartzCore -framework QTKit
 
