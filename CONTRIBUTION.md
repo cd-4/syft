@@ -19,7 +19,7 @@ Contents:
 
 ### Inspiration
 
-The main inspiration behind this was having a messy meme folder. I was tired of having to ctrl+click and drag and double click or do a long click to rename a file and double click to open a new preview window for every single meme I wanted to inspect. Being a vim user, I knew there was a more efficient way. For those of you who don't know what vim is, it is a text editor that is used for coding. As opposed to a normal text editor, where you have a line and can click, vim is purely keyboard based, meaning you do everything, including highlighting and scrolling, with the keyboard. By eliminating fine mouse movements and switching your hands from your keyboard to your mouse, you can be much more efficient. So I basically said "I want vim as a file explorer" and went to town.
+The main inspiration behind this was having a messy meme folder. I was tired of having to ctrl+click and drag and double click or do a long click to rename a file and double click to open a new preview window for every single meme I wanted to inspect. Being a vim user, I knew there was a more efficient way. For those of you who don't know what vim is, it is a text editor that is used for coding. As opposed to a normal text editor, where you have a line and can click, vim is purely keyboard based, meaning you do everything, including highlighting and scrolling, with the keyboard. By eliminating fine mouse movements and the time it takes to switch your hands from your keyboard to your mouse, you can be much more efficient. So I basically said "I want vim as a file explorer" and went to town.
 
 ## Development
 
