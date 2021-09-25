@@ -10,6 +10,11 @@ What that means is a significant portion of the actions are done with the keyboa
 
 ![There should be a screenshot here!](https://github.com/syftking/syft/blob/main/sample.png?raw=true)
 
+### Contents
+- [Installation](#Installation)
+- [Startup](#Startup)
+- [Commands](#Commands)
+   - Something Else
 
 ### New Features
 If you wish to see any features, I suggest you create an issue and pray that someone decides to take it up, or implement it yourself and create a pull request.
@@ -44,7 +49,7 @@ The usages was designed to be effective once you know how to use it. Some comman
 
 
 
-# General Commands
+# Commands
 
 This is the general control scheme. They have different contexts but this is what you need in your head.
 
