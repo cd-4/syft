@@ -111,7 +111,7 @@ There should be a way for group actions. The behavior should be as follows
 ### Hot Keys
 
 I want to have programmable hot keys `0-9`. Would have limited functionality at first.
-- There could also be some sort of "leader" key, perhaps `Q` to mimic vim. Then you could hotkey `A-Z`
+- There could also be some sort of "leader" key, perhaps `,`. Then you could hotkey `A-Z,0-9`
   - Would really only be necessary once scripting is in place
 
 Hotkey actions:
