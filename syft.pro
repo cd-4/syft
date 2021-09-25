@@ -1,9 +1,7 @@
-QT      += core
-
+QT += core
 QT += widgets
 QT += multimedia
 QT += multimediawidgets
-
 QT += webview
 QT += webenginewidgets
 
@@ -27,8 +25,11 @@ LIBS += -framework AppKit -framework QuartzCore -framework QTKit
 # In order to do so, uncomment the following line.
 DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
-SOURCES += src/contentviewer.cpp \
+SOURCES += \
+    src/imageviewer.cpp \
+    src/contentviewer.cpp \
     src/directorytableview.cpp \
+    src/fileviewer.cpp \
     src/main.cpp \
     src/mainwindow.cpp \
     src/syftactionmanager.cpp \
@@ -42,8 +43,10 @@ SOURCES += src/contentviewer.cpp \
     src/webmvideoplayer.cpp
 
 HEADERS += \
+    inc/imageviewer.h \
     inc/contentviewer.h \
     inc/directorytableview.h \
+    inc/fileviewer.h \
     inc/mainwindow.h \
     inc/syftaction.h \
     inc/syftactionmanager.h \
@@ -54,7 +57,7 @@ HEADERS += \
     inc/syftorganizer.h \
     inc/syftsettings.h \
     inc/videoplayer.h \
-    inc/webmvideoplayer.h \
+    inc/webmvideoplayer.h
 
 FORMS += \
     inc/mainwindow.ui

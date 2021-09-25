@@ -2,6 +2,7 @@
 #define SYFTSETTINGS_H
 
 #include <QSettings>
+#include <QApplication>
 
 #include "syftdir.h"
 
@@ -13,8 +14,11 @@ public:
     void SetLastDirectory(QString dir);
     QString GetLastDirectory();
 
-    static SyftSettings* GetSettings();
+private:
+    QApplication* m_application;
 
+public:
+    static SyftSettings* GetSettings();
     static bool s_settingsExist;
     static SyftSettings* s_settings;
 };

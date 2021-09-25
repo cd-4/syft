@@ -1,6 +1,7 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
+#include <QApplication>
 #include <QMainWindow>
 #include <QGridLayout>
 #include <QFileDialog>
@@ -29,6 +30,8 @@ public:
     void NextFile();
     void PreviousFile();
     ActionMode Mode() {return m_mode;}
+
+    static QApplication application;
 
 private:
     void ChangeFile(SyftFile* newFile);

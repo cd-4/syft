@@ -8,9 +8,10 @@
 //#include <QVideoWidget>
 #include <QWidget>
 
+#include "fileviewer.h"
 #include "syftfile.h"
 
-class VideoPlayer: public QWidget
+class VideoPlayer: public FileViewer
 {
 public:
     VideoPlayer(QWidget* parent);
@@ -20,24 +21,20 @@ public:
     QMediaPlayer* m_mediaPlayer;
     QVideoWidget* m_videoWidget;
 
-
-    void SetFile(SyftFile* newFile);
-    void ReloadVideo();
-
-    bool IsPlaying();
-    void Play();
-    void Pause();
-    void Restart();
-    void PlayPause();
-    void Mute(bool is_muted);
-    void ToggleMute();
-
-    void FFBig();
-    void FFLittle();
-    void RWBig();
-    void RWLittle();
+    virtual SyftFileType GetType();
+    virtual void ProcessNewFile();
+    virtual void TryCancel();
+    virtual void PlayPauseSlot();
+    virtual void ToggleSoundSlot();
+    virtual void RightSlot();
+    virtual void LeftSlot();
+    virtual void StopAll();
 
 private:
+    void Play();
+    void Pause();
+    void Mute(bool is_muted);
+    bool IsPlaying();
     void Skip(int amount);
 
 };

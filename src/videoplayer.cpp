@@ -7,13 +7,11 @@
 #include <QVideoWidget>
 #include <QVBoxLayout>
 #include <QWidget>
-#include <QDebug>
 
 
 VideoPlayer::VideoPlayer(QWidget* parent)
-    :QWidget(parent),
+    :FileViewer(parent),
     m_currentSkipSize(0),
-    m_currentFile(0),
     m_mediaPlayer(0),
     m_videoWidget(0)
 {
@@ -27,20 +25,19 @@ VideoPlayer::VideoPlayer(QWidget* parent)
     setLayout(mLayout);
 }
 
-
-
-void VideoPlayer::SetFile(SyftFile* newFile)
-{
-    m_currentFile = newFile;
-    ReloadVideo();
+SyftFileType VideoPlayer::GetType() {
+    return SyftFileType::Video;
 }
 
-void VideoPlayer::ReloadVideo()
+
+
+void VideoPlayer::ProcessNewFile()
 {
     QMediaPlaylist* playlist = new QMediaPlaylist(m_mediaPlayer);
-    playlist->addMedia(QUrl::fromLocalFile(m_currentFile->FullName()));
+    playlist->addMedia(QUrl::fromLocalFile(CurrentFile()->FullName()));
     m_mediaPlayer->setPlaylist(playlist);
     m_currentSkipSize = m_mediaPlayer->duration() / 10;
+    Mute(true);
     Play();
 }
 
@@ -61,7 +58,7 @@ void VideoPlayer::Mute(bool is_muted)
     m_mediaPlayer->setMuted(is_muted);
 }
 
-void VideoPlayer::ToggleMute()
+void VideoPlayer::ToggleSoundSlot()
 {
     m_mediaPlayer->setMuted(!m_mediaPlayer->isMuted());
 }
@@ -73,12 +70,12 @@ void VideoPlayer::Pause()
     }
 }
 
-void VideoPlayer::Restart()
+void VideoPlayer::TryCancel()
 {
     m_mediaPlayer->setPosition(0);
 }
 
-void VideoPlayer::PlayPause()
+void VideoPlayer::PlayPauseSlot()
 {
     if (IsPlaying()) {
         m_mediaPlayer->pause();
@@ -99,23 +96,19 @@ void VideoPlayer::Skip(int amount)
     m_mediaPlayer->setPosition(new_pos);
 }
 
-void VideoPlayer::FFBig()
+void VideoPlayer::RightSlot()
 {
     Skip(m_currentSkipSize);
 }
 
-void VideoPlayer::FFLittle()
-{
-    Skip(m_currentSkipSize/2);
-}
-
-void VideoPlayer::RWBig()
+void VideoPlayer::LeftSlot()
 {
     Skip(-m_currentSkipSize);
 }
 
-void VideoPlayer::RWLittle()
+void VideoPlayer::StopAll()
 {
-    Skip(-m_currentSkipSize/2);
+    Pause();
+    Mute(true);
 }
 

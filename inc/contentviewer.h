@@ -12,6 +12,7 @@
 
 #include "directorytableview.h"
 #include "syftfile.h"
+#include "imageviewer.h"
 #include "videoplayer.h"
 #include "webmvideoplayer.h"
 
@@ -27,14 +28,6 @@ public:
 
     void SetCurrentFile(SyftFile* file);
 
-    void ScaleImage(float scaleAmount);
-    void NudgeZoomIn() { ScaleImage(1.2); }
-    void NudgeZoomOut() { ScaleImage(0.75); }
-
-    void SetScrollPosition(int x, int y);
-    void ScrollVertical(int amount);
-    void ScrollHorizontal(int amount);
-
     bool IsEditingFilename();
     void TryCancel();
 
@@ -46,14 +39,12 @@ public:
     void PlayPause();
     void ToggleMute();
 
-    bool IsVideo();
-    bool IsImage();
-
 private:
-    void ProcessNewImage();
-    void ProcessNewVideo();
-    void ProcessNewWeb();
-    void ChangeTab(int newTab);
+    void addPage(FileViewer* page, QString name);
+    void ProcessFileChange();
+    int FileTypeIndex();
+    void ChangeTab(SyftFileType type);
+    FileViewer* CurrentView() { return m_currentViewer; }
 
 public slots:
     // Image Manipulation
@@ -69,9 +60,12 @@ public slots:
 
 private:
     // Interaction
+    QMap<SyftFileType, int> m_tabIndices;
+    QMap<SyftFileType, FileViewer*> m_tabs;
+    FileViewer* m_currentViewer;
+
     QString m_titleString;
     QString m_dirLabelString;
-    QLabel* m_dirLabel;
     bool m_canZoomIn;
 
     // File Info
@@ -84,17 +78,9 @@ private:
     // Title
     QLineEdit* m_titleLabel;
 
-
-    // Images
-    QPixmap* m_originalPixmap;			// The full size original pixmap
-    QGraphicsView* m_graphicsView;
-    QGraphicsScene* m_imageScene;
-    QGraphicsPixmapItem* m_pixmapItem;			// The pixmap shown in the view
-
-    // Videos
+    // FileViewers
+    ImageViewer* m_imageViewer;
     VideoPlayer* m_videoPlayer;
-
-    // Web
     WebmVideoPlayer* m_webView;
 
 };

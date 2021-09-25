@@ -27,6 +27,26 @@ public:
     SyftFileType FileType();
     QFileInfo* info();
 
+    static QString TypeName(SyftFileType type) {
+        switch(type) {
+        case SyftFileType::Image:
+            return "Image";
+            break;
+        case SyftFileType::Video:
+            return "Video";
+            break;
+        case SyftFileType::Web:
+            return "Web";
+            break;
+        case SyftFileType::Document:
+            return "Document";
+            break;
+        case SyftFileType::Text:
+            return "Text";
+            break;
+        }
+    }
+
 
 };
 

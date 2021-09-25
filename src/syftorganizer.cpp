@@ -70,10 +70,10 @@ void SyftOrganizer::reloadFiles(bool resetIndex)
     if (resetIndex || m_currentFileIndex >= NumFiles()) {
         m_currentFileIndex = 0;
     }
-    if (list.size() == 0) {
+    if (list.size() != 0) {
         qDebug() << "No Files";
+        SetFileIndex(0);
     }
-    SetFileIndex(0);
 }
 
 void SyftOrganizer::ChangeFileIndexBy(int amount)

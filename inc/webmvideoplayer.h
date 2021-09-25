@@ -2,23 +2,28 @@
 #define WEBMVIDEOPLAYER_H
 
 #include <QWebEngineView>
+#include <QWebEnginePage>
+#include <QMediaPlayer>
 
 #include "syftfile.h"
+#include "fileviewer.h"
 
-#include "videoplayer.h"
-
-class WebmVideoPlayer : public QWidget
+class WebmVideoPlayer : public FileViewer
 {
 public:
     WebmVideoPlayer(QWidget* parent);
 
-    SyftFile* m_currentFile;
-    QMediaPlayer* m_mediaPlayer;
     QWebEngineView* m_webWidget;
+    QWebEnginePage* m_webPage;
 
-
-    void SetFile(SyftFile* newFile);
-    void ReloadVideo();
+    virtual SyftFileType GetType();
+    virtual void ProcessNewFile();
+    virtual void TryCancel();
+    virtual void PlayPauseSlot();
+    virtual void ToggleSoundSlot();
+    virtual void RightSlot();
+    virtual void LeftSlot();
+    virtual void StopAll();
 };
 
 #endif // WEBMVIDEOPLAYER_H

@@ -61,6 +61,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent),
     SyftFile* file = new SyftFile("/Users/chaz/Desktop/TestDir/dark_truth_about_china.png");
     m_contentViewer->show();
     m_contentViewer->SetCurrentFile(file);
+    m_contentViewer->setFocus();
 
     // Set Up Signals
     connect(m_organizer, 	SIGNAL(FileChangedSignal(SyftFile*)),
