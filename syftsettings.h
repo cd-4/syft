@@ -3,10 +3,15 @@
 
 #include <QSettings>
 
+#include "syftdir.h"
+
 class SyftSettings : public QSettings
 {
 public:
     SyftSettings();
+
+    void SetLastDirectory(QString dir);
+    QString GetLastDirectory();
 
     static SyftSettings* GetSettings();
 

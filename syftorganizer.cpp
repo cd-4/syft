@@ -9,6 +9,7 @@
 #include "syftactions.h"
 #include "syftactionmanager.h"
 #include "syftorganizer.h"
+#include "syftsettings.h"
 
 SyftOrganizer::SyftOrganizer(SyftActionManager* manager, QWidget* parent):
     m_manager(manager),
@@ -16,8 +17,8 @@ SyftOrganizer::SyftOrganizer(SyftActionManager* manager, QWidget* parent):
     m_currentDirectory(0),
     m_currentFileIndex(0)
 {
-    QStringList dirs = QStandardPaths::standardLocations(QStandardPaths::DesktopLocation);
-    ChangeDirectory(dirs.at(0));
+    QString dirname = SyftSettings::GetSettings()->GetLastDirectory();
+    ChangeDirectory(dirname);
 }
 
 void SyftOrganizer::UpDir()
@@ -34,9 +35,11 @@ void SyftOrganizer::ChangeDirectory(const QString newDirectory)
 
 void SyftOrganizer::ChangeDirectory(SyftDir* newDir)
 {
-    m_parent->setWindowTitle("Syft -- " + newDir->path());
+    //m_parent->setWindowTitle("Syft -- " + newDir->path());
+    m_parent->setWindowTitle("Syft -- ~/path/to/directory");
     m_currentDirectory = newDir;
     reloadFiles(true);
+    SyftSettings::GetSettings()->SetLastDirectory(m_currentDirectory->path());
     emit DirectoryChangedSignal(m_currentDirectory);
 }
 
@@ -119,6 +122,12 @@ void SyftOrganizer::RenameFile(SyftFile* file, QString newFile) {
 void SyftOrganizer::MoveFile(SyftFile* file, QString newFile) {
     MoveFileAction *action = new MoveFileAction(file, newFile, this);
     m_manager->AddAction(action);
+}
+
+void SyftOrganizer::DeleteFile(SyftFile *file) {
+    DeleteFileAction *action = new DeleteFileAction(file);
+    m_manager->AddAction(action);
+    //SetFileIndex(m_currentFileIndex + amount);
 }
 
 void SyftOrganizer::RenameDir(SyftDir* dir, QString newName) {

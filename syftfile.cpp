@@ -64,3 +64,7 @@ QString SyftFile::Dir() {
 QString SyftFile::FullName() {
     return info()->filePath();
 }
+
+QString SyftFile::FileName() {
+    return info()->fileName();
+}

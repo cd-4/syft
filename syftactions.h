@@ -73,4 +73,13 @@ private:
     SyftFile* m_file;
 };
 
+class DeleteFileAction : public SyftAction {
+    QString m_fileName;
+    QByteArray m_data;
+public:
+    DeleteFileAction(SyftFile* file);
+    virtual int Perform();
+    virtual int Revert();
+};
+
 #endif // SYFTACTIONS_H
