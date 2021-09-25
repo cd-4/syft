@@ -16,6 +16,7 @@ What that means is a significant portion of the actions are done with the keyboa
 - [Commands](#Commands)
    - [Content View](#Content-View)
    - [Directory View](#Directory-View)
+- [Donations](#Donations)
 
 ### New Features
 If you wish to see any features, I suggest you create an issue and pray that someone decides to take it up, or implement it yourself and create a pull request.
@@ -55,20 +56,16 @@ The usages was designed to be effective once you know how to use it. Some comman
 
 This is the general control scheme. They have different contexts but this is what you need in your head.
 
-I strongly suggest you read all of these because you simply cannot do most actions without knowing the key commands and there is no help via the GUI.
+I strongly suggest you read all of these because you simply cannot do most actions without knowing the key commands and there is no help via the GUI at this time.
 
-
-`Esc` : Cancel
-
-`J/K` : Next/Previous 
-
-`R` : Rename
-
-`WASD` : Move
-
-`U` : Undo
-
-`Shift+U` : Redo
+Key | Action
+--- | ---
+`Esc` | Cancel
+`J/K` | Next/Previous 
+`R` | Rename
+`WASD` | Move
+`U` | Undo
+`Shift+U` | Redo
 
 
 
@@ -76,31 +73,21 @@ I strongly suggest you read all of these because you simply cannot do most actio
 
 The content view is the main area that displays the file contents.
 
-`Esc` : Reset Image Position [Image] / Reset Video [Video]
-
-`J/K` : Next/Previous File
-
-`R` : Rename File. `Enter` to confirm, `Esc` to cancel.
-
-`I/O` : Zoom In/Out [Image Only]
-
-`WASD` : Move Image [Image Only]
-
-`A/S` : Step Back/Forward [Video Only]
-
-`Z` : Toggle Mute [Video Only] (Videos always start muted)
-
-`/` : Select New Directory [Opens Dialog]
-
-`.` : Navigate Up a Directory
-
-`N` : New Directory. `Enter` to confirm, `Esc` to cancel. [Enters Directory View]
-
-`M` : Move [Enters Directory View]
-
-`Delete/Backspace` : Delete File [Warning Dialog. Cannot be undone]
-
-`P` : Open file in default program
+Key | Action
+--- | ---
+`Esc` | Reset Image Position [Image] / Reset Video [Video]
+`J/K` | Next/Previous File
+`R` | Rename File. `Enter` to confirm, `Esc` to cancel.
+`I/O` | Zoom In/Out [Image Only]
+`WASD` | Move Image [Image Only]
+`A/S` | Step Back/Forward [Video Only]
+`Z` | Toggle Mute [Video Only] (Videos always start muted)
+`/` | Select New Directory [Opens Dialog]
+`.` | Navigate Up a Directory
+`N` | New Directory. `Enter` to confirm, `Esc` to cancel. [Enters Directory View]
+`M` | Move [Enters Directory View]
+`Delete/Backspace` | Delete File [Warning Dialog. Cannot be undone]
+`P` | Open file in default program
 
 
 
@@ -108,17 +95,14 @@ The content view is the main area that displays the file contents.
 
 The directory view is the pane on the left which has the names of subdirectories.
 
-`Esc` : Cancel action. Return to Content View.
-
-`J/K` : Next/Previous subirectory.
-
-`Enter` : Move current file to highlighted subdirectory
-
-`Shift+Enter` : Navigate to highlighted subdirectory
-
-`R` : Rename highlighted directory. `Enter` to confirm, `Esc` to cancel.
-
-`N` : New Directory. `Enter` to confirm, `Esc` to cancel.
+Key | Action
+--- | ---
+`Esc` | Cancel action. Return to Content View.
+`J/K` | Next/Previous subirectory.
+`Enter` | Move current file to highlighted subdirectory
+`Shift+Enter` | Navigate to highlighted subdirectory
+`R` | Rename highlighted directory. `Enter` to confirm, `Esc` to cancel.
+`N` | New Directory. `Enter` to confirm, `Esc` to cancel.
 
 ### Donations
 
