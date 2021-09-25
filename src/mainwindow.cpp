@@ -226,7 +226,6 @@ void MainWindow::UndoSlot() {
 }
 
 void MainWindow::RedoSlot() {
-    qDebug() << "REDO";
     m_actionManager->RedoAction();
     m_contentViewer->UpdateFileText();
     m_directoryView->RefreshView();
@@ -238,16 +237,13 @@ void MainWindow::TitleLabelEnterSlot() {
         SyftFile* currentFile = m_organizer->CurrentFile();
         QString newFilename = currentFile->Dir() + edit->text();
         m_organizer->RenameFile(currentFile, newFilename);
-        ChangeMode(DefaultMode);
     }
 }
 
 void MainWindow::RPressSlot() {
     if (m_directoryView->hasFocus()) {
-        ChangeMode(RenameDirMode);
         m_directoryView->StartRenameDir();
     } else {
-        ChangeMode(RenameFileMode);
         m_contentViewer->StartRenameFile();
     }
 }
@@ -256,11 +252,9 @@ void MainWindow::keyPressEvent(QKeyEvent *e)
 {
     if (e->key() == Qt::Key_Escape) {
         if (m_contentViewer->hasFocus()) {
-            m_contentViewer->ResetImageFocus();
+            m_contentViewer->TryCancel();
         }
         m_contentViewer->setFocus();
-        ChangeMode(DefaultMode);
-        m_contentViewer->TryCancel();
     } else if (e->key() == Qt::Key_Enter || e->key() == Qt::Key_Return) {
         if (m_directoryView->hasFocus()) {
             if (e->modifiers() == Qt::ShiftModifier) {
@@ -284,7 +278,6 @@ void MainWindow::keyPressEvent(QKeyEvent *e)
 void MainWindow::StartMoveFileSlot()
 {
     m_directoryView->EnterView();
-    ChangeMode(MoveFileMode);
 }
 
 void MainWindow::StartMoveSubdirSlot()
@@ -352,11 +345,3 @@ void MainWindow::DeleteFileSlot()
 }
 
 
-
-void MainWindow::ChangeMode(ActionMode newMode) {
-    m_mode = newMode;
-    return;
-    if (m_mode == DefaultMode) {
-        m_contentViewer->ResetFocus();
-    }
-}

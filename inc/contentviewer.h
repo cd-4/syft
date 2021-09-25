@@ -33,7 +33,6 @@ public:
 
     QLineEdit* TitleLabel() { return m_titleLabel; }
 
-    void ResetFocus();
     void StartRenameFile();
     void ResetImageFocus();
     void PlayPause();

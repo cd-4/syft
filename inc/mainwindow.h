@@ -35,7 +35,6 @@ public:
 
 private:
     void ChangeFile(SyftFile* newFile);
-    void ChangeMode(ActionMode newMode);
 
     ActionMode m_mode;
     Ui::MainWindow *ui;

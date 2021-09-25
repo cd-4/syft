@@ -146,10 +146,6 @@ void ContentViewer::ChangeTab(SyftFileType type) {
     }
 }
 
-void ContentViewer::ResetFocus() {
-    //m_graphicsView->setFocus();
-}
-
 void ContentViewer::ZoomInSlot() {
     CurrentView()->ZoomInSlot();
 }
@@ -177,7 +173,8 @@ void ContentViewer::DPressSlot() {
 void ContentViewer::TryCancel() {
     if (IsEditingFilename()) {
         m_titleLabel->setText(CurrentFile()->info()->fileName());
-        ResetFocus();
+    } else {
+        CurrentView()->TryCancel();
     }
 }
 

@@ -4,8 +4,8 @@
 #include <QGraphicsVideoItem>
 #include <QMediaPlayer>
 #include <QMediaPlaylist>
+#include <QHBoxLayout>
 #include <QVideoWidget>
-#include <QVBoxLayout>
 #include <QWidget>
 
 
@@ -20,7 +20,7 @@ VideoPlayer::VideoPlayer(QWidget* parent)
 
     m_mediaPlayer->setVideoOutput(m_videoWidget);
 
-    QVBoxLayout * mLayout=new QVBoxLayout(this);
+    QHBoxLayout * mLayout=new QHBoxLayout(this);
     mLayout->addWidget(m_videoWidget);
     setLayout(mLayout);
 }
@@ -28,8 +28,6 @@ VideoPlayer::VideoPlayer(QWidget* parent)
 SyftFileType VideoPlayer::GetType() {
     return SyftFileType::Video;
 }
-
-
 
 void VideoPlayer::ProcessNewFile()
 {
@@ -111,4 +109,5 @@ void VideoPlayer::StopAll()
     Pause();
     Mute(true);
 }
+
 

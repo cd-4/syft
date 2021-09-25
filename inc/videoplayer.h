@@ -5,7 +5,7 @@
 #include <QGraphicsView>
 #include <QGraphicsVideoItem>
 #include <QMediaPlayer>
-//#include <QVideoWidget>
+#include <QKeyEvent>
 #include <QWidget>
 
 #include "fileviewer.h"
