@@ -28,14 +28,14 @@ Here is a simple guide on how to work this.
 4) On the right, is the content viewer, where you can view your files
 5) On the top is the name of the file
 
-# Usage
+## Usage
 
 The usages was designed to be effective once you know how to use it. Some commands are only applicable to Images, some are only applicable to Videos.
 
 ###### Note:
 Webm files do not yet support scrubbing and restarting. Simply change files to restart [See Issue 5](https://github.com/syftking/syft/issues/5)
 
-## General Commands
+# General Commands
 
 This is the general control scheme. They have different contexts but this is what you need in your head.
 
@@ -53,7 +53,7 @@ I strongly suggest you read all of these because you simply cannot do most actio
 
 `Shift+U` : Redo
 
-### Content View
+## Content View
 
 The content view is the main area that displays the file contents.
 
@@ -79,7 +79,7 @@ The content view is the main area that displays the file contents.
 
 `M` : Move [Enters Directory View]
 
-### Directory View
+## Directory View
 
 The directory view is the pane on the left which has the names of subdirectories.
 
