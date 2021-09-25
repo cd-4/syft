@@ -3,6 +3,16 @@ A program for optimal file browsing, renaming, and movement.
 
 With minimal keystrokes, you can rename files, create directories, move files, preview files with Syft.
 
+### Contents
+- [Welcome](#Welcome)
+- [Installation](#Installation)
+- [Startup](#Startup)
+- [Commands](#Commands)
+   - [Content View](#Content-View)
+   - [Directory View](#Directory-View)
+- [Donations](#Donations)
+
+
 ##### Welcome
 This was designed out of necessity, since my meme folder was becoming unwieldy. For that reason, there isn't much fluff on the program.
 It was designed for quick filtering and sorting of files, not for optimally viewing the files, or to look good.
@@ -10,13 +20,6 @@ What that means is a significant portion of the actions are done with the keyboa
 
 ![There should be a screenshot here!](https://github.com/syftking/syft/blob/main/sample.png?raw=true)
 
-### Contents
-- [Installation](#Installation)
-- [Startup](#Startup)
-- [Commands](#Commands)
-   - [Content View](#Content-View)
-   - [Directory View](#Directory-View)
-- [Donations](#Donations)
 
 ### New Features
 If you wish to see any features, I suggest you create an issue and pray that someone decides to take it up, or implement it yourself and create a pull request.
@@ -30,6 +33,9 @@ To do so, follow these steps:
 1) Download [Qt Creator](https://www.qt.io/product/development-tools) and install the latest version of Qt
 2) Open the `syft.pro` file in Qt Creator
 3) Build the project
+4) **Note**: You may need to specify QT_PLUGIN_PATH within Qt Creator.
+  - For me, I could fix this by looking in my Build Environment in Qt Creator, and choosing environment variables
+  - The value QTDIR should be pre-populated. Simply set the QT_PLUGIN_PATH to "$QTDIR/plugins" (not actually $QTDIR but the full path)
 
 # Startup
 
