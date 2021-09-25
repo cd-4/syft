@@ -42,6 +42,7 @@ public:
     RenameFileAction(SyftFile* file, QString newName);
     virtual int Perform();
     virtual int Revert();
+    QString NewName() { return m_newName; }
 
 private:
     SyftFile* m_file;
@@ -57,9 +58,9 @@ public:
     virtual int Revert();
 
 private:
+    QString m_newName;
     SyftDir* m_dir;
     QString m_originalName;
-    QString m_newName;
 };
 
 // Move File
@@ -68,6 +69,9 @@ public:
     MoveFileAction(SyftFile* file, QString newName, SyftOrganizer* organizer);
     virtual int Perform();
     virtual int Revert();
+    virtual SyftAction* RepeatAction(QString filename);
+    virtual bool CanRepeat() { return true; }
+
 private:
     SyftOrganizer* m_organizer;
     SyftFile* m_file;

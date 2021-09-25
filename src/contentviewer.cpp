@@ -178,15 +178,3 @@ void ContentViewer::PlayPause() {
 void ContentViewer::ToggleMute() {
     CurrentView()->ToggleSoundSlot();
 }
-
-
-
-
-
-
-
-
-
-
-
-

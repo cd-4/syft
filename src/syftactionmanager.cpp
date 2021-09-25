@@ -1,5 +1,6 @@
 
 #include <list>
+#include <QDebug>
 
 #include "syftactionmanager.h"
 
@@ -21,7 +22,7 @@ void SyftActionManager::UndoAction() {
         mostRecentAction->Revert();
         m_previousActions.pop_back();
         m_undoneActions.push_back(mostRecentAction);
-        emit RefreshFileTitle();
+        emit RefreshFileTitle(); // This shouldn't be here
     }
 }
 
@@ -34,3 +35,16 @@ void SyftActionManager::RedoAction() {
     }
 }
 
+void SyftActionManager::RepeatAction(SyftFile *file) {
+    qDebug() << "Repeat Attempt";
+    if (!m_previousActions.size()) {
+        return;
+    }
+    SyftAction* most_recent = m_previousActions.back();
+    qDebug() << "Repeating Action";
+    if (most_recent->CanRepeat()) {
+        qDebug() << "Repeating Action";
+        SyftAction* repeat = most_recent->RepeatAction(file->FullName());
+        AddAction(repeat);
+    }
+}

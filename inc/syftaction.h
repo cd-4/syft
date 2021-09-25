@@ -8,6 +8,8 @@ class SyftAction
 public:
     virtual int Perform() = 0;
     virtual int Revert() = 0;
+    virtual bool CanRepeat() { return false; }
+    virtual SyftAction* RepeatAction(QString filename) { return 0; }
 };
 
 

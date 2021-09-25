@@ -5,6 +5,7 @@
 
 #include <QObject>
 
+#include "syftfile.h"
 #include "syftaction.h"
 
 class SyftActionManager : public QObject
@@ -16,6 +17,7 @@ public:
     void AddAction(SyftAction* action);
     void UndoAction();
     void RedoAction();
+    void RepeatAction(SyftFile* file);
 
 signals:
     void RefreshFileTitle();

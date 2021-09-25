@@ -24,7 +24,7 @@ SyftOrganizer::SyftOrganizer(SyftActionManager* manager, QWidget* parent):
 void SyftOrganizer::UpDir()
 {
     m_currentDirectory->cdUp();
-    reloadFiles(true);
+    ChangeDirectory(m_currentDirectory);
     emit DirectoryChangedSignal(m_currentDirectory);
 }
 
@@ -35,6 +35,10 @@ void SyftOrganizer::ChangeDirectory(const QString newDirectory)
 
 void SyftOrganizer::ChangeDirectory(SyftDir* newDir)
 {
+    int files = newDir->entryInfoList().count();
+    if (!files) {
+        return;
+    }
     m_parent->setWindowTitle("Syft -- " + newDir->path());
     m_currentDirectory = newDir;
     reloadFiles(true);
@@ -46,9 +50,6 @@ void SyftOrganizer::reloadFiles(bool resetIndex)
 {
     m_files.clear();
     m_dirs.clear();
-
-    //dir.setFilter(QDir::Files | QDir::Hidden | QDir::NoSymLinks);
-    //dir.setSorting(QDir::Size | QDir::Reversed);
 
     QFileInfoList list = m_currentDirectory->entryInfoList();
     for (int i = 0; i < list.size(); ++i) {
@@ -70,9 +71,8 @@ void SyftOrganizer::reloadFiles(bool resetIndex)
     if (resetIndex || m_currentFileIndex >= NumFiles()) {
         m_currentFileIndex = 0;
     }
-    if (list.size() != 0) {
-        qDebug() << "No Files";
-        SetFileIndex(0);
+    if (m_files.size() != 0) {
+        SetFileIndex(m_currentFileIndex);
     }
 }
 
@@ -90,7 +90,6 @@ void SyftOrganizer::SetFileIndex(int index)
     m_currentFileIndex = index % m_files.size();
     SyftFile* file = m_files[m_currentFileIndex];
     emit FileChangedSignal(file);
-
 }
 
 void SyftOrganizer::NextFile() { ChangeFileIndexBy(1); }
@@ -132,6 +131,10 @@ void SyftOrganizer::DeleteFile(SyftFile *file) {
 void SyftOrganizer::RenameDir(SyftDir* dir, QString newName) {
     RenameDirectoryAction *action = new RenameDirectoryAction(dir, newName);
     m_manager->AddAction(action);
+}
+
+void SyftOrganizer::RepeatAction() {
+    m_manager->RepeatAction(CurrentFile());
 }
 
 void SyftOrganizer::SetCurrentFile(SyftFile *file) {

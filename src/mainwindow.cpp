@@ -9,6 +9,7 @@
 
 #include "syftactions.h"
 #include "syftorganizer.h"
+#include "commandline.h"
 
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
@@ -19,7 +20,8 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent),
     m_contentViewer(0),
     m_organizer(0),
     m_actionManager(0),
-    m_directoryDialog(0)
+    m_directoryDialog(0),
+    m_commandLineManager(0)
 {
     ui->setupUi(this);
 
@@ -28,6 +30,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent),
 
     // Organizer
     m_organizer = new SyftOrganizer(m_actionManager, this);
+    m_commandLineManager = new CommandLineManager(m_organizer);
 
     m_directoryDialog = new QFileDialog(this);
     m_directoryDialog->setFileMode(QFileDialog::Directory);
@@ -186,6 +189,15 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent),
     connect(deleteFileAction, SIGNAL(triggered()),
             this,		      SLOT(DeleteFileSlot()));
 
+
+    // Hotkey Bar 0-9
+
+    QAction *zeroAction = new QAction(this);
+    addAction(zeroAction);
+    zeroAction->setShortcut(Qt::Key_0);
+    connect(zeroAction, SIGNAL(triggered()),
+            this,	    SLOT(ZeroActionSlot()));
+
     resize(QDesktopWidget().availableGeometry(this).size() * 0.7);
 
 }
@@ -256,6 +268,7 @@ void MainWindow::keyPressEvent(QKeyEvent *e)
         }
         m_contentViewer->setFocus();
     } else if (e->key() == Qt::Key_Enter || e->key() == Qt::Key_Return) {
+
         if (m_directoryView->hasFocus()) {
             if (e->modifiers() == Qt::ShiftModifier) {
                 SyftDir* selected = m_directoryView->SelectedDir();
@@ -267,9 +280,16 @@ void MainWindow::keyPressEvent(QKeyEvent *e)
                 SyftFile* currentFile = m_organizer->CurrentFile();
                 QString filename = currentFile->info()->fileName();
                 QString newFilename = newDir + filename;
+                qDebug() << "Begin Move";
                 m_organizer->MoveFile(currentFile, newFilename);
+                qDebug() << "End Move";
             }
+        } else if (m_contentViewer->IsEditingFilename()) {
+            m_contentViewer->setFocus();
+        } else {
+            m_organizer->RepeatAction();
         }
+
     } else if (e->key() == Qt::Key_Space) {
         m_contentViewer->PlayPause();
     }
@@ -319,7 +339,6 @@ void MainWindow::DefaultProgSlot()
 void MainWindow::DeleteFileSlot()
 {
     qDebug() << "Deleting";
-    QMessageBox::StandardButton reply;
     QString title = "Are you sure?"; // Ignored on OS X
     QString message = "This action cannot be undone.\nAre you sure you want to delete "
                        + m_organizer->CurrentFile()->FileName() + "?";
@@ -338,10 +357,13 @@ void MainWindow::DeleteFileSlot()
         m_organizer->DeleteFile(m_organizer->CurrentFile());
         m_organizer->reloadFiles(false);
     }
+}
 
-
-
-
+void MainWindow::ZeroActionSlot() {
+    CommandLine* l = m_commandLineManager->GetPythonCommand("--version");
+    l->run();
+    qDebug() << "=== OUTPUT ===";
+    qDebug() << l->lines()[0];
 }
 
 

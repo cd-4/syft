@@ -26,6 +26,9 @@ LIBS += -framework AppKit -framework QuartzCore -framework QTKit
 DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    src/pythoncommandline.cpp \
+    src/commandline.cpp \
+    src/commandlinemanager.cpp \
     src/imageviewer.cpp \
     src/contentviewer.cpp \
     src/directorytableview.cpp \
@@ -43,10 +46,13 @@ SOURCES += \
     src/webmvideoplayer.cpp
 
 HEADERS += \
+    inc/commandline.h \
+    inc/commandlinemanager.h \
     inc/imageviewer.h \
     inc/contentviewer.h \
     inc/directorytableview.h \
     inc/fileviewer.h \
+    inc/pythoncommandline.h \
     inc/mainwindow.h \
     inc/syftaction.h \
     inc/syftactionmanager.h \

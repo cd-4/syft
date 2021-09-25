@@ -60,6 +60,9 @@ RenameFileAction::RenameFileAction(SyftFile* file,
     m_originalName(file->fileName()),
     m_newName(newName)
 {
+    qDebug() << "-----";
+    qDebug() << "Old: " << m_originalName;
+    qDebug() << "New: " << m_newName;
 }
 
 int RenameFileAction::Perform() {
@@ -119,6 +122,20 @@ int MoveFileAction::Revert() {
     return output;
 }
 
+SyftAction* MoveFileAction::RepeatAction(QString filename) {
+    // Calculate file names
+    QString sep = QDir::separator();
+    int lastInd = filename.lastIndexOf(sep);
+    QString baseName = filename.right(lastInd);
+    QString otherFileNewName = NewName();
+    int lastId = otherFileNewName.lastIndexOf(sep);
+    QString newFile = otherFileNewName.left(lastId) + sep + baseName;
+
+    MoveFileAction* action = new MoveFileAction(new SyftFile(filename), newFile, m_organizer);
+    return action;
+
+}
+
 DeleteFileAction::DeleteFileAction(SyftFile* file)
 {
     m_fileName = file->FullName();
@@ -137,6 +154,7 @@ int DeleteFileAction::Perform() {
 
 int DeleteFileAction::Revert() {
     /*
+    // Something like this should work. Just need to work out the kinks
     auto out = "Revert Attempt: ";
     QFile file(m_fileName);
     if (file.open(QIODevice::WriteOnly)) {

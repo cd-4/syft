@@ -43,6 +43,8 @@ public:
     void RenameDir(SyftDir* dir, QString newName); // full paths
     void MoveFile(SyftFile* file, QString newFile); // full paths
     void DeleteFile(SyftFile* file);
+    void RepeatAction();
+
     SyftDir* NewDir(); // Creates "untitled", then we call "RenameDir" immediately so the user can name it
 
 

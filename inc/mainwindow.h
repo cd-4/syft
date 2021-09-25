@@ -7,6 +7,7 @@
 #include <QFileDialog>
 #include <QKeyEvent>
 
+#include "commandlinemanager.h"
 #include "contentviewer.h"
 #include "syftorganizer.h"
 #include "syftactionmanager.h"
@@ -15,9 +16,6 @@ QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
 QT_END_NAMESPACE
 
-enum ActionMode {
-    DefaultMode, RenameFileMode, MoveFileMode, RenameDirMode
-};
 
 class MainWindow : public QMainWindow
 {
@@ -29,14 +27,12 @@ public:
 
     void NextFile();
     void PreviousFile();
-    ActionMode Mode() {return m_mode;}
 
     static QApplication application;
 
 private:
     void ChangeFile(SyftFile* newFile);
 
-    ActionMode m_mode;
     Ui::MainWindow *ui;
 
     // Main Widgets
@@ -50,6 +46,9 @@ private:
     SyftOrganizer *m_organizer;
     SyftActionManager *m_actionManager;
     QFileDialog *m_directoryDialog;
+
+    // Subprocesses
+    CommandLineManager *m_commandLineManager;
 
 private slots:
     void FileChangedSlot(SyftFile* newFile);
@@ -68,6 +67,9 @@ private slots:
     void DirectorySelectedSlot(const QUrl& url);
     void UpDirSlot();
     void DefaultProgSlot();
+
+    // Hotkeys
+    void ZeroActionSlot();
 
     void keyPressEvent(QKeyEvent *e);
 
