@@ -13,7 +13,7 @@ What that means is a significant portion of the actions are done with the keyboa
 
 ### New Features
 If you wish to see any features, I suggest you create an issue and pray that someone decides to take it up, or implement it yourself and create a pull request.
-I am open to any new features and PRs until it becomes a burden.
+I am open to any new features and PRs.
 
 # Installation
 
