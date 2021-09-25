@@ -59,29 +59,15 @@ public slots:
     void UpdateFileText();
 
 private:
-    // Interaction
+    // Information
     QMap<SyftFileType, int> m_tabIndices;
     QMap<SyftFileType, FileViewer*> m_tabs;
     FileViewer* m_currentViewer;
-
-    QString m_titleString;
-    QString m_dirLabelString;
-    bool m_canZoomIn;
-
-    // File Info
     SyftFile* m_currentFile;
 
-    // Formatting
-    QLayout* m_layout;
+    // Views
     QTabWidget* m_tabWidget;
-
-    // Title
     QLineEdit* m_titleLabel;
-
-    // FileViewers
-    ImageViewer* m_imageViewer;
-    VideoPlayer* m_videoPlayer;
-    WebmVideoPlayer* m_webView;
 
 };
 

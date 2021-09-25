@@ -26,48 +26,41 @@ int VERTICAL_NUDGE_AMOUNT = 100;
 ContentViewer::ContentViewer(QWidget *parent)
     : QWidget(parent),
       m_currentViewer(0),
-      m_titleString(""),
-      m_dirLabelString(""),
-      m_canZoomIn(true),
       m_currentFile(0),
-      m_layout(0),
-      m_tabWidget(0),
-      m_videoPlayer(0),
-      m_webView(0)
+      m_tabWidget(0)
 {
 
     // Title/Edit widget
-    m_titleString = QString("Syft");
-    m_titleLabel = new QLineEdit(m_titleString, this);
+    m_titleLabel = new QLineEdit("Syft", this);
     m_titleLabel->setAlignment(Qt::AlignCenter);
     m_titleLabel->setStyleSheet("* { background-color: rgba(0, 0, 0, 0); }");
 
     QHBoxLayout* topBarLayout = new QHBoxLayout(this);
     topBarLayout->addWidget(m_titleLabel);
 
-    QWidget* w = new QWidget(this); w->setLayout(topBarLayout);
+    QWidget* w = new QWidget(this);
+    w->setLayout(topBarLayout);
 
     // Add Scroll Area to Main Widget
 
-    m_layout = new QVBoxLayout(this);
-    m_layout->addWidget(w);
+    QVBoxLayout* layout = new QVBoxLayout(this);
+    layout->addWidget(w);
 
-    m_webView = new WebmVideoPlayer(this);
-    m_imageViewer = new ImageViewer(this);
-    // Video Player
-    m_videoPlayer = new VideoPlayer(this);
+    ImageViewer* imageViewer = new ImageViewer(this);
+    VideoPlayer* videoPlayer = new VideoPlayer(this);
+    WebmVideoPlayer* webmVideoPlayer = new WebmVideoPlayer(this);
 
-    addPage(m_imageViewer, "Image");
-    addPage(m_videoPlayer, "Video");
-    addPage(m_webView, "Webm");
-    m_currentViewer = m_imageViewer;
+    addPage(imageViewer, "Image");
+    addPage(videoPlayer, "Video");
+    addPage(webmVideoPlayer, "Webm");
+    m_currentViewer = imageViewer;
     //m_tabWidget->addTab(m_webView, "Web");
     m_tabWidget->tabBar()->hide();
     m_tabWidget->setCurrentIndex(0);
 
-    m_layout->addWidget(m_tabWidget);
+    layout->addWidget(m_tabWidget);
 
-    setLayout(m_layout);
+    setLayout(layout);
 
 }
 
