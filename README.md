@@ -19,9 +19,56 @@ To do so, follow these steps:
 2) Open the `syft.pro` file in Qt Creator
 3) Build the project
 
+# Startup
+
+Here is a simple guide on how to work this.
+1) Start Syft
+2) Press `/` and select the directory which contains your unorganized memes
+3) On the left is a list of subdirectories
+4) On the right, is the content viewer, where you can view your files
+5) On the top is the name of the file
+
 # Usage
 
-The usages was designed to be effective once you know how to use it. Here are the commands:
+The usages was designed to be effective once you know how to use it. Some commands are only applicable to Images, some are only applicable to Videos.
 
-`J`
+###### Note:
+Webm files do not yet support scrubbing and restarting. Simply change files to restart [5](https://github.com/syftking/syft/issues/5)
 
+## General Commands
+
+This is the general control scheme. They have different contexts but this is what you need in your head.
+
+`Esc` : Cancel
+
+`J/K` : Next/Previous 
+
+`R` : Rename
+
+`WASD` : Move
+
+`U` : Undo
+
+`Shift+U` : Redo
+
+### Content View
+
+`Esc` : Reset Image Position [Image] / Reset Video [Video]
+
+`I/O` : Zoom In/Out [Image Only]
+
+`WASD` : Move Image [Image Only]
+
+`A/S` : Step Back/Forward [Video Only]
+
+`Z` : Toggle Mute [Video Only]
+
+`Esc` : Reset Video 
+
+#### File Manipulation
+
+`/` : Select New Directory (Dialog)
+
+`.` : Navigate Up a Directory
+
+`M` : Move
