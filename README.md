@@ -113,4 +113,11 @@ The directory view is the pane on the left which has the names of subdirectories
 
 `N` : New Directory. `Enter` to confirm, `Esc` to cancel.
 
+### Donations
+
+BTC: `bc1qy6gvsa02st4exneg244gx9l557fuj7mlu3en7n`
+
+ETH: `0x8A05d9f1A483A71C7AfeCF498eEd980168535F70`
+
+XMR: 
 
