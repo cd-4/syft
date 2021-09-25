@@ -6,6 +6,7 @@ This was designed out of necessity, since my meme folder was becoming unwieldy. 
 It was designed for quick filtering and sorting of files, not for optimally viewing the files, or to look good.
 What that means is a significant portion of the actions are done with the keyboard and there simply aren't options for using the mouse, and it also uses the default Qt appearance.
 
+
 ### New Features
 If you wish to see any features, I suggest you create an issue and pray that someone decides to take it up, or implement it yourself and create a pull request.
 I am open to any new features and PRs until it becomes a burden.
@@ -33,13 +34,18 @@ Here is a simple guide on how to work this.
 The usages was designed to be effective once you know how to use it. Some commands are only applicable to Images, some are only applicable to Videos.
 
 ###### Note:
-Webm files do not yet support scrubbing and restarting. Simply change files to restart [See Issue 5](https://github.com/syftking/syft/issues/5)
+- Do not click anywhere in the Content Viewer. You will not be able to change files afterwards. If you click there, simply click outside of the content view inside the window and it should revert back to normal. [See Issue #4](https://github.com/syftking/syft/issues/4)
+
+- Webm files do not yet support scrubbing and restarting. Simply change files to restart [See Issue #5](https://github.com/syftking/syft/issues/5)
+
+
 
 # General Commands
 
 This is the general control scheme. They have different contexts but this is what you need in your head.
 
 I strongly suggest you read all of these because you simply cannot do most actions without knowing the key commands and there is no help via the GUI.
+
 
 `Esc` : Cancel
 
@@ -52,6 +58,8 @@ I strongly suggest you read all of these because you simply cannot do most actio
 `U` : Undo
 
 `Shift+U` : Redo
+
+
 
 ## Content View
 
@@ -78,6 +86,8 @@ The content view is the main area that displays the file contents.
 `N` : New Directory. `Enter` to confirm, `Esc` to cancel. [Enters Directory View]
 
 `M` : Move [Enters Directory View]
+
+
 
 ## Directory View
 
