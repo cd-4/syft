@@ -39,6 +39,8 @@ Webm files do not yet support scrubbing and restarting. Simply change files to r
 
 This is the general control scheme. They have different contexts but this is what you need in your head.
 
+I strongly suggest you read all of these because you simply cannot do most actions without knowing the key commands and there is no help via the GUI.
+
 `Esc` : Cancel
 
 `J/K` : Next/Previous 
@@ -53,7 +55,13 @@ This is the general control scheme. They have different contexts but this is wha
 
 ### Content View
 
+The content view is the main area that displays the file contents.
+
 `Esc` : Reset Image Position [Image] / Reset Video [Video]
+
+`J/K` : Next/Previous File
+
+`R` : Rename File. `Enter` to confirm, `Esc` to cancel.
 
 `I/O` : Zoom In/Out [Image Only]
 
@@ -63,12 +71,28 @@ This is the general control scheme. They have different contexts but this is wha
 
 `Z` : Toggle Mute [Video Only]
 
-`Esc` : Reset Video 
-
-#### File Manipulation
-
 `/` : Select New Directory (Dialog)
 
 `.` : Navigate Up a Directory
 
-`M` : Move
+`N` : New Directory. `Enter` to confirm, `Esc` to cancel. [Enters Directory View]
+
+`M` : Move [Enters Directory View]
+
+### Directory View
+
+The directory view is the pane on the left which has the names of subdirectories.
+
+`Esc` : Cancel action. Return to Content View.
+
+`J/K` : Next/Previous subirectory.
+
+`Enter` : Move current file to highlighted subdirectory
+
+`Shift+Enter` : Navigate to highlighted subdirectory
+
+`R` : Rename highlighted directory. `Enter` to confirm, `Esc` to cancel.
+
+`N` : New Directory. `Enter` to confirm, `Esc` to cancel.
+
+
