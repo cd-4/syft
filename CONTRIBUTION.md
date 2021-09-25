@@ -28,7 +28,7 @@ The main inspiration behind this was having a messy meme folder. I was tired of 
 ##### Efficiency
 Syft is very **efficient** and that should always be priority number 1. How can we make it faster for the user to do the thing they want to do. The experience of someone new to Syft or unwilling to learn should always be an afterthought. In my eyes, if you use Syft but opt for mouse and GUI controls you are missing the point entirely, you will probably have a better experience using Finder or the File Explorer.
 
-My initial thought was that if someone wants to create a sensible mouse GUI, then I would be fine with the PR and would merge it. However sometimes forcing the user to use something that is unwieldy will force them to look up and the command on their own, as opposed to settling for the button and losing their time. I could really go either way on this one.
+My initial thought was that if someone wants to create a sensible mouse GUI, then I would be fine with the PR and would merge it. However sometimes forcing the user to use something that is unwieldy will force them to look up and the command on their own, making them more efficient in the long run. I could really go either way on this one.
 
 When I say _efficiency_ I really mean that the user should have to do very little.
 If the user wants to do one thing, they press one button.
