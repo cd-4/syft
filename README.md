@@ -6,6 +6,8 @@ This was designed out of necessity, since my meme folder was becoming unwieldy. 
 It was designed for quick filtering and sorting of files, not for optimally viewing the files, or to look good.
 What that means is a significant portion of the actions are done with the keyboard and there simply aren't options for using the mouse, and it also uses the default Qt appearance.
 
+![There should be a screenshot here!](https://github.com/syftking/syft/blob/main/sample.png?raw=true)
+
 
 ### New Features
 If you wish to see any features, I suggest you create an issue and pray that someone decides to take it up, or implement it yourself and create a pull request.
