@@ -127,11 +127,6 @@ There should be a way to read PDFs in this. May be able to use the webview alrea
 `W/S` - Scroll Down
 `A/D` - Change Pages
 
-
-### Scripting
-
-Eventually I'd like there to be a way to scripting via `Python` and `bash`.
-
 ### Tag Database
 
 The purpose of this is to be able to tag certain files with certain tags and be able to search your files for the tags.
