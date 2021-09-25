@@ -1,5 +1,7 @@
-# syft
+# Syft
 A program for optimal file browsing, renaming, and movement.
+
+With minimal keystrokes, you can rename files, create directories, move files, preview files with Syft.
 
 ##### Welcome
 This was designed out of necessity, since my meme folder was becoming unwieldy. For that reason, there isn't much fluff on the program.
