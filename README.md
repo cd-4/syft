@@ -98,6 +98,7 @@ Key | Action
 `Delete/Backspace` | Delete File [Warning Dialog. Cannot be undone]
 `P` | Open file in default program
 `Space` | Start/Pause Video [Video Only]
+`Enter` | Repeat Action (Currently only works with `Move` actions)
 
 
 
