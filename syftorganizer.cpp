@@ -1,0 +1,153 @@
+
+#include <vector>
+
+#include <QDir>
+#include <QDebug>
+#include <QWidget>
+#include <QStandardPaths>
+
+#include "syftactions.h"
+#include "syftactionmanager.h"
+#include "syftorganizer.h"
+
+SyftOrganizer::SyftOrganizer(SyftActionManager* manager, QWidget* parent):
+    m_manager(manager),
+    m_parent(parent),
+    m_currentDirectory(0),
+    m_currentFileIndex(0)
+{
+    QStringList dirs = QStandardPaths::standardLocations(QStandardPaths::DesktopLocation);
+    ChangeDirectory(dirs.at(0));
+}
+
+void SyftOrganizer::UpDir()
+{
+    m_currentDirectory->cdUp();
+    reloadFiles(true);
+    emit DirectoryChangedSignal(m_currentDirectory);
+}
+
+void SyftOrganizer::ChangeDirectory(const QString newDirectory)
+{
+    ChangeDirectory(new SyftDir(newDirectory));
+}
+
+void SyftOrganizer::ChangeDirectory(SyftDir* newDir)
+{
+    m_parent->setWindowTitle("Syft -- " + newDir->path());
+    m_currentDirectory = newDir;
+    reloadFiles(true);
+    emit DirectoryChangedSignal(m_currentDirectory);
+}
+
+void SyftOrganizer::reloadFiles(bool resetIndex)
+{
+    m_files.clear();
+    m_dirs.clear();
+
+    //dir.setFilter(QDir::Files | QDir::Hidden | QDir::NoSymLinks);
+    //dir.setSorting(QDir::Size | QDir::Reversed);
+
+    QFileInfoList list = m_currentDirectory->entryInfoList();
+    for (int i = 0; i < list.size(); ++i) {
+        QFileInfo fileInfo = list.at(i);
+        if (fileInfo.isDir()) {
+            SyftDir* dir = new SyftDir(fileInfo.absoluteFilePath());
+            if (fileInfo.absoluteFilePath().compare(m_currentDirectory->path())==0) {
+                continue;
+            }
+            if (!fileInfo.absoluteFilePath().contains(m_currentDirectory->path())) {
+                continue;
+            }
+            m_dirs.push_back(dir);
+        } else {
+            SyftFile* file = new SyftFile(fileInfo.absoluteFilePath());
+            m_files.push_back(file);
+        }
+    }
+    if (resetIndex || m_currentFileIndex >= NumFiles()) {
+        m_currentFileIndex = 0;
+    }
+    if (list.size() == 0) {
+        qDebug() << "No Files";
+    }
+    SetFileIndex(0);
+}
+
+void SyftOrganizer::ChangeFileIndexBy(int amount)
+{
+    SetFileIndex(m_currentFileIndex + amount);
+}
+
+void SyftOrganizer::SetFileIndex(int index)
+{
+    // Modulo doesn't work with negatives for some reason
+    if (index < 0) {
+        index = m_files.size() + index;
+    }
+    m_currentFileIndex = index % m_files.size();
+    SyftFile* file = m_files[m_currentFileIndex];
+    emit FileChangedSignal(file);
+
+}
+
+void SyftOrganizer::NextFile() { ChangeFileIndexBy(1); }
+
+void SyftOrganizer::PreviousFile() { ChangeFileIndexBy(-1); }
+
+SyftFile* SyftOrganizer::File(int index) const {
+    return m_files[index];
+}
+
+SyftFile* SyftOrganizer::CurrentFile() const {
+    return File(m_currentFileIndex);
+}
+
+SyftDir* SyftOrganizer::CurrentDirectory() const {
+    return m_currentDirectory;
+}
+
+SyftDir* SyftOrganizer::Directory(int index) const {
+    return m_dirs[index];
+}
+
+void SyftOrganizer::RenameFile(SyftFile* file, QString newFile) {
+    RenameFileAction *action = new RenameFileAction(file, newFile);
+    m_manager->AddAction(action);
+}
+
+void SyftOrganizer::MoveFile(SyftFile* file, QString newFile) {
+    MoveFileAction *action = new MoveFileAction(file, newFile, this);
+    m_manager->AddAction(action);
+}
+
+void SyftOrganizer::RenameDir(SyftDir* dir, QString newName) {
+    RenameDirectoryAction *action = new RenameDirectoryAction(dir, newName);
+    m_manager->AddAction(action);
+}
+
+void SyftOrganizer::SetCurrentFile(SyftFile *file) {
+    QString startFilename = file->FullName();
+    for (int i=0; i<NumFiles(); i++) {
+        SyftFile* f = m_files[i];
+        QString testFilename = f->FullName();
+        if(testFilename.compare(startFilename) == 0) {
+            m_currentFileIndex = i;
+            emit FileChangedSignal(file);
+        }
+    }
+}
+
+SyftDir* SyftOrganizer::NewDir() {
+    QString newName = "untitled";
+    int ind = 0;
+    while (m_currentDirectory->exists(newName)) {
+        newName = "untitled_" + QString::number(ind);
+        ind++;
+    }
+    CreateSubdirectoryAction *action = new CreateSubdirectoryAction(m_currentDirectory->path(), newName);
+    m_manager->AddAction(action);
+    SyftDir *newDir = new SyftDir(m_currentDirectory->path() + QDir::separator() + newName);
+    m_dirs.push_back(newDir);
+    return newDir;
+}
