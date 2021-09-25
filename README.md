@@ -30,12 +30,15 @@ I am open to any new features and PRs.
 Currently, the only way to run Syft is to build it yourself.
 To do so, follow these steps:
 
-- 1) Download [Qt Creator](https://www.qt.io/product/development-tools) and install the latest version of Qt
-- 2) Open the `syft.pro` file in Qt Creator
-- 3) Build the project
+- Download [Qt Creator](https://www.qt.io/product/development-tools) and install the latest version of Qt
+- Open the `syft.pro` file in Qt Creator
+- Build the project
 - **Note**: You may need to specify QT_PLUGIN_PATH within Qt Creator.
   - For me, I could fix this by looking in my Build Environment in Qt Creator, and choosing environment variables
   - The value QTDIR should be pre-populated. Simply set the QT_PLUGIN_PATH to "$QTDIR/plugins" (not actually $QTDIR but the full path)
+
+As far as building with `qmake` you're on your own. I'd recommend just using qt creator to build and editing where you like to do your editing.
+If you are able to figure it out, feel free to fix this area of the `README` to help others with that.
 
 # Startup
 
