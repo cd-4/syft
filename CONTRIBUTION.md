@@ -51,27 +51,16 @@ Examples:
 
 Key | Command | Explanation
 --- | --- | ---
-
 `J/K` | Up/Down | Changing images is one of the primary movements and the users hand should remain on the home row.
-
 `WASD`| Move around | Move in an image, as well as using `A/D` to scroll through a video and `W/S` to scroll through a pdf and `A/D` to change pdf pages. These all stem from the standard `WASD` directional movement. I think this is intuitive enough for people to figure out.
-
 `R` | Rename | `R` and if someone is familiar with `WASD` it would be the same as the "Reload" control. Same for directories when in directory view.
-
 `I/O` | Zoom in/out | "In" and "Out" start with `I/O` and the keys are right beside eachother and near `J/K`
-
 `U` | Undo | Starts with `U`.  It's also near `J/K/I/O`. `Shift+U` for undo I don't like that much but I think it's fine. Just don't make mistakes.
-
 `Z` | Mute | `Z` for "Zip it"
-
 `/` | Open Directory | `/` denotes a directory. Near `.`
-
 `.` | Up a directory | In the terminal `..` is up a directory. Near `/`
-
 `N` | New Directory | New starts with `N`. Near `M` and both activate the Directory Pane
-
 `N` | Move File/Directory | Move starts with `M`. Near `N` and both activate the Directory Pane
-
 `P` | Open in default | Uses default `P`rogram to open the file
 
 ### Permissions
