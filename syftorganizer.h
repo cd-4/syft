@@ -38,9 +38,11 @@ public:
     void SetFileIndex(int index);
     void NextFile();
     void PreviousFile();
+
     void RenameFile(SyftFile* file, QString newFile); // full paths
     void RenameDir(SyftDir* dir, QString newName); // full paths
     void MoveFile(SyftFile* file, QString newFile); // full paths
+    void DeleteFile(SyftFile* file);
     SyftDir* NewDir(); // Creates "untitled", then we call "RenameDir" immediately so the user can name it
 
 

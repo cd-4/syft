@@ -118,3 +118,37 @@ int MoveFileAction::Revert() {
     m_organizer->SetCurrentFile(m_file);
     return output;
 }
+
+DeleteFileAction::DeleteFileAction(SyftFile* file)
+{
+    m_fileName = file->FullName();
+    /*
+    if (file->open(QIODevice::ReadOnly | QIODevice::Text)) {
+        m_data = file->readAll();
+        file->close();
+    }
+    */
+}
+
+int DeleteFileAction::Perform() {
+    QFile(m_fileName).remove();
+    return 0;
+}
+
+int DeleteFileAction::Revert() {
+    /*
+    auto out = "Revert Attempt: ";
+    QFile file(m_fileName);
+    if (file.open(QIODevice::WriteOnly)) {
+        for (auto iter = m_data.begin(); iter != m_data.end(); ++iter) {
+            file.write(m_data, qstrlen(m_data));
+        }
+        file.close();
+        qDebug() << out << "Success";
+        return 0;
+    }
+    qDebug() << out << "Failure";
+    return 1;
+    */
+}
+

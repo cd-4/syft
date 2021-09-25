@@ -53,6 +53,7 @@ private slots:
     void FileChangedSlot(SyftFile* newFile);
     void NextFileSlot();
     void PreviousFileSlot();
+    void DeleteFileSlot();
     void UndoSlot();
     void RedoSlot();
     void TitleLabelEnterSlot();
@@ -64,6 +65,7 @@ private slots:
     void ActivateChangeDirSlot();
     void DirectorySelectedSlot(const QUrl& url);
     void UpDirSlot();
+    void DefaultProgSlot();
 
     void keyPressEvent(QKeyEvent *e);
 

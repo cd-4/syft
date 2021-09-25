@@ -1,9 +1,13 @@
 
+#include <QMessageBox>
+#include <QAbstractButton>
 #include <QHeaderView>
 #include <QKeySequence>
 #include <QDesktopWidget>
+#include <QDesktopServices>
 #include <QFileDialog>
 
+#include "confirmationdialog.h"
 #include "syftactions.h"
 #include "syftorganizer.h"
 
@@ -169,6 +173,19 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent),
     connect(upDirAction, SIGNAL(triggered()),
             this,		 SLOT(UpDirSlot()));
 
+    QAction *defaultProgramAction = new QAction(this);
+    addAction(defaultProgramAction);
+    defaultProgramAction->setShortcut(Qt::Key_P);
+    connect(defaultProgramAction, SIGNAL(triggered()),
+            this,		 		  SLOT(DefaultProgSlot()));
+
+    QAction *deleteFileAction = new QAction(this);
+    addAction(deleteFileAction);
+    deleteFileAction->setShortcut(Qt::Key_Delete);
+    deleteFileAction->setShortcut(Qt::Key_Backspace);
+    connect(deleteFileAction, SIGNAL(triggered()),
+            this,		      SLOT(DeleteFileSlot()));
+
     resize(QDesktopWidget().availableGeometry(this).size() * 0.7);
 
 }
@@ -298,6 +315,40 @@ void MainWindow::DirectorySelectedSlot(const QUrl& url)
 void MainWindow::UpDirSlot()
 {
     m_organizer->UpDir();
+}
+
+void MainWindow::DefaultProgSlot()
+{
+    qDebug() << "Default Program Open";
+    QDesktopServices::openUrl(QUrl("file:" + m_organizer->CurrentFile()->FullName()));
+}
+
+void MainWindow::DeleteFileSlot()
+{
+    qDebug() << "Deleting";
+    QMessageBox::StandardButton reply;
+    QString title = "Are you sure?"; // Ignored on OS X
+    QString message = "This action cannot be undone.\nAre you sure you want to delete "
+                       + m_organizer->CurrentFile()->FileName() + "?";
+
+    QMessageBox msgBox;
+    msgBox.setText(message);
+    msgBox.setWindowTitle(title);
+    QPushButton* pButtonYes =  msgBox.addButton(tr("Yes [Enter]"), QMessageBox::YesRole);
+    QAbstractButton* yesButton = (QAbstractButton *) pButtonYes;
+    msgBox.addButton(tr("No [Esc]"), QMessageBox::NoRole);
+    msgBox.setDefaultButton(pButtonYes);
+
+    msgBox.exec();
+
+    if (msgBox.clickedButton() == yesButton) {
+        m_organizer->DeleteFile(m_organizer->CurrentFile());
+        m_organizer->reloadFiles(false);
+    }
+
+
+
+
 }
 
 

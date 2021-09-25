@@ -23,6 +23,7 @@ public:
 
     QString Dir();
     QString FullName();
+    QString FileName();
     SyftFileType FileType();
     QFileInfo* info();
 
