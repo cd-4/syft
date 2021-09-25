@@ -91,6 +91,10 @@ The content view is the main area that displays the file contents.
 
 `M` : Move [Enters Directory View]
 
+`Delete/Backspace` : Delete File [Warning Dialog. Cannot be undone]
+
+`P` : Open file in default program
+
 
 
 ## Directory View
