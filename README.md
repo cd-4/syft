@@ -77,7 +77,7 @@ The content view is the main area that displays the file contents.
 
 `A/S` : Step Back/Forward [Video Only]
 
-`Z` : Toggle Mute [Video Only]
+`Z` : Toggle Mute [Video Only] (Videos always start muted)
 
 `/` : Select New Directory [Opens Dialog]
 
