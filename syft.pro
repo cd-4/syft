@@ -27,8 +27,7 @@ LIBS += -framework AppKit -framework QuartzCore -framework QTKit
 # In order to do so, uncomment the following line.
 DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
-SOURCES += \
-    src/contentviewer.cpp \
+SOURCES += src/contentviewer.cpp \
     src/directorytableview.cpp \
     src/main.cpp \
     src/mainwindow.cpp \
@@ -43,22 +42,22 @@ SOURCES += \
     src/webmvideoplayer.cpp
 
 HEADERS += \
-    contentviewer.h \
-    directorytableview.h \
-    mainwindow.h \
-    syftaction.h \
-    syftactionmanager.h \
-    syftactions.h \
-    syftdir.h \
-    syftfile.h \
-    syftoptions.h \
-    syftorganizer.h \
-    syftsettings.h \
-    videoplayer.h \
-    webmvideoplayer.h
+    inc/contentviewer.h \
+    inc/directorytableview.h \
+    inc/mainwindow.h \
+    inc/syftaction.h \
+    inc/syftactionmanager.h \
+    inc/syftactions.h \
+    inc/syftdir.h \
+    inc/syftfile.h \
+    inc/syftoptions.h \
+    inc/syftorganizer.h \
+    inc/syftsettings.h \
+    inc/videoplayer.h \
+    inc/webmvideoplayer.h \
 
 FORMS += \
-    mainwindow.ui
+    inc/mainwindow.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
