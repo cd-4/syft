@@ -19,6 +19,7 @@ CONFIG += link_pkgconfig
 
 TARGET = Syft
 
+INCLUDEPATH += inc/
 
 LIBS += -framework AppKit -framework QuartzCore -framework QTKit
 
@@ -27,19 +28,19 @@ LIBS += -framework AppKit -framework QuartzCore -framework QTKit
 DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
-    contentviewer.cpp \
-    directorytableview.cpp \
-    main.cpp \
-    mainwindow.cpp \
-    syftactionmanager.cpp \
-    syftactions.cpp \
-    syftdir.cpp \
-    syftfile.cpp \
-    syftoptions.cpp \
-    syftorganizer.cpp \
-    syftsettings.cpp \
-    videoplayer.cpp \
-    webmvideoplayer.cpp
+    src/contentviewer.cpp \
+    src/directorytableview.cpp \
+    src/main.cpp \
+    src/mainwindow.cpp \
+    src/syftactionmanager.cpp \
+    src/syftactions.cpp \
+    src/syftdir.cpp \
+    src/syftfile.cpp \
+    src/syftoptions.cpp \
+    src/syftorganizer.cpp \
+    src/syftsettings.cpp \
+    src/videoplayer.cpp \
+    src/webmvideoplayer.cpp
 
 HEADERS += \
     contentviewer.h \
