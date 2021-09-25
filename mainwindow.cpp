@@ -7,7 +7,6 @@
 #include <QDesktopServices>
 #include <QFileDialog>
 
-#include "confirmationdialog.h"
 #include "syftactions.h"
 #include "syftorganizer.h"
 
