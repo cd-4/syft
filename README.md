@@ -14,7 +14,8 @@ What that means is a significant portion of the actions are done with the keyboa
 - [Installation](#Installation)
 - [Startup](#Startup)
 - [Commands](#Commands)
-   - Something Else
+   - [Content View](#Content View)
+   - [Directory View](#Directory View)
 
 ### New Features
 If you wish to see any features, I suggest you create an issue and pray that someone decides to take it up, or implement it yourself and create a pull request.
