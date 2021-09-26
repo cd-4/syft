@@ -39,16 +39,23 @@ public:
     void NextFile();
     void PreviousFile();
 
-    void RenameFile(SyftFile* file, QString newFile); // full paths
+    void ToggleGrab();
+    void ClearGrab();
+
+    void RenameFile(QString newFile); // full paths
     void RenameDir(SyftDir* dir, QString newName); // full paths
-    void MoveFile(SyftFile* file, QString newFile); // full paths
-    void DeleteFile(SyftFile* file);
+    void Move(SyftDir* dir); // full paths
+    void DeleteFile();
     void RepeatAction();
+    void RepeatMovement();
 
     SyftDir* NewDir(); // Creates "untitled", then we call "RenameDir" immediately so the user can name it
 
 
 private:
+    SyftLogger* m_logger;
+    SyftDir* m_lastMovementDest;
+    QList<SyftFile*> m_grabbedFiles;
     SyftActionManager* m_manager;
     QWidget* m_parent;
     SyftDir* m_currentDirectory;

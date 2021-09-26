@@ -70,6 +70,8 @@ private slots:
     void DirectorySelectedSlot(const QUrl& url);
     void UpDirSlot();
     void DefaultProgSlot();
+    void GrabSlot();
+    void ClearGrabSlot();
 
     // Hotkeys
     void ZeroActionSlot();

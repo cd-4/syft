@@ -87,10 +87,37 @@ class DeleteFileAction : public SyftAction {
     QString m_fileName;
     QByteArray m_data;
 public:
-    DeleteFileAction(SyftFile* file);
+    DeleteFileAction(SyftFile* file, SyftOrganizer* organizer);
     virtual int Perform();
     virtual int Revert();
     virtual QString Message();
+private:
+    SyftOrganizer* m_organizer;
+};
+
+// Multiple Actions Chained together
+class GroupAction : public SyftAction {
+public:
+    GroupAction();
+    virtual int Perform();
+    virtual int Revert();
+    virtual bool CanRepeat();
+    void AddAction(SyftAction* action);
+
+protected:
+    QList<SyftAction*> Actions() { return m_actions; };
+
+private:
+    QList<SyftAction*> m_actions;
+    QList<SyftAction*> Reversed();
+};
+
+class MoveGroupAction : public GroupAction {
+public:
+    MoveGroupAction(QList<SyftFile*> files, SyftDir* dir, SyftOrganizer* organizer);
+    virtual QString Message();
+private:
+    SyftDir* m_dir;
 };
 
 #endif // SYFTACTIONS_H

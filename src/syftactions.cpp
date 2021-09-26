@@ -31,7 +31,8 @@ int CreateSubdirectoryAction::Revert()
 }
 
 QString CreateSubdirectoryAction::Message() {
-    return "N: " + SyftDir(m_subDirectory).basename();
+    return "";
+    //return "N: " + SyftDir(m_subDirectory).basename();
 }
 
 // Move to a new directory
@@ -108,7 +109,12 @@ int RenameDirectoryAction::Revert() {
 }
 
 QString RenameDirectoryAction::Message() {
-    return "R:" + SyftDir(m_originalName).basename() + QDir::separator() + " to " + QDir(m_newName).path() + QDir::separator();
+    QString originalName = SyftDir(m_originalName).basename() + QDir::separator();
+    QString newName = SyftDir(m_newName).basename() + QDir::separator();
+    if (originalName.startsWith("untitled_")) {
+        return "N:" + newName;
+    }
+    return "R:" + originalName + " -> " + newName;
 }
 
 // Move File
@@ -145,18 +151,22 @@ QString MoveFileAction::Message() {
 SyftAction* MoveFileAction::RepeatAction(QString filename) {
     // Calculate file names
     QString sep = QDir::separator();
-    int lastInd = filename.lastIndexOf(sep);
-    QString baseName = filename.right(lastInd);
+    int lastInd = filename.lastIndexOf(sep) + 1;
+    QString baseName = filename.right(filename.size() - lastInd);
+    qDebug() << "Basname: " << baseName;
     QString otherFileNewName = NewName();
+    qDebug() << "NewName: " << otherFileNewName;
     int lastId = otherFileNewName.lastIndexOf(sep);
     QString newFile = otherFileNewName.left(lastId) + sep + baseName;
+    qDebug() << "NewFile: " << newFile;
 
     MoveFileAction* action = new MoveFileAction(new SyftFile(filename), newFile, m_organizer);
     return action;
 
 }
 
-DeleteFileAction::DeleteFileAction(SyftFile* file)
+DeleteFileAction::DeleteFileAction(SyftFile* file, SyftOrganizer* organizer):
+    m_organizer(organizer)
 {
     m_fileName = file->FullName();
     /*
@@ -169,6 +179,8 @@ DeleteFileAction::DeleteFileAction(SyftFile* file)
 
 int DeleteFileAction::Perform() {
     QFile(m_fileName).remove();
+    m_organizer->reloadFiles(false);
+    m_organizer->NextFile();
     return 0;
 }
 
@@ -195,3 +207,51 @@ QString DeleteFileAction::Message() {
     return "D:" + SyftFile(m_fileName).FileName();
 }
 
+
+
+GroupAction::GroupAction() { }
+
+int GroupAction::Perform() {
+    int output = 0;
+    for (SyftAction* action : m_actions) {
+        output += action->Perform();
+    }
+    return output;
+}
+
+int GroupAction::Revert() {
+    int output = 0;
+    for (SyftAction* action : Reversed()) {
+        output += action->Revert();
+    }
+    return output;
+}
+
+bool GroupAction::CanRepeat() {
+
+}
+
+QList<SyftAction*> GroupAction::Reversed() {
+    QList<SyftAction*> result;
+    result.reserve( m_actions.size() ); // reserve is new in Qt 4.7
+    std::reverse_copy( m_actions.begin(), m_actions.end(), std::back_inserter( result ) );
+    return result;
+}
+
+void GroupAction::AddAction(SyftAction* action) {
+    m_actions.append(action);
+}
+
+MoveGroupAction::MoveGroupAction(QList<SyftFile*> files, SyftDir* dir, SyftOrganizer* organizer):
+    m_dir(dir)
+{
+    for(SyftFile* file : files) {
+        QString newName = dir->path() + QDir::separator() + file->FileName();
+        MoveFileAction* newAction = new MoveFileAction(file, newName, organizer);
+        AddAction(newAction);
+    }
+}
+
+QString MoveGroupAction::Message() {
+    return "M:" + QString::number(Actions().count()) + " files to " + m_dir->basename() + QDir::separator();
+}

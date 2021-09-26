@@ -12,11 +12,13 @@
 #include "syftsettings.h"
 
 SyftOrganizer::SyftOrganizer(SyftActionManager* manager, QWidget* parent):
+    m_logger(0),
     m_manager(manager),
     m_parent(parent),
     m_currentDirectory(0),
     m_currentFileIndex(0)
 {
+    m_logger = SyftLogger::GetLogger();
     QString dirname = SyftSettings::GetSettings()->GetLastDirectory();
     ChangeDirectory(dirname);
 }
@@ -113,20 +115,29 @@ SyftDir* SyftOrganizer::Directory(int index) const {
     return m_dirs[index];
 }
 
-void SyftOrganizer::RenameFile(SyftFile* file, QString newFile) {
-    RenameFileAction *action = new RenameFileAction(file, newFile);
+void SyftOrganizer::RenameFile(QString newFile) {
+    RenameFileAction *action = new RenameFileAction(CurrentFile(), newFile);
     m_manager->AddAction(action);
 }
 
-void SyftOrganizer::MoveFile(SyftFile* file, QString newFile) {
-    MoveFileAction *action = new MoveFileAction(file, newFile, this);
-    m_manager->AddAction(action);
+void SyftOrganizer::Move(SyftDir* dir) {
+    m_lastMovementDest = new SyftDir(dir->path());
+    m_lastMovementDest->cdUp();
+
+    if (m_grabbedFiles.size() > 0) {
+        MoveGroupAction* action = new MoveGroupAction(m_grabbedFiles, m_lastMovementDest, this);
+        m_manager->AddAction(action);
+    } else {
+        QString newDir = dir->absolutePath() + QDir::separator();
+        QString newFile = newDir + CurrentFile()->FileName();
+        MoveFileAction *action = new MoveFileAction(CurrentFile(), newFile, this);
+        m_manager->AddAction(action);
+    }
 }
 
-void SyftOrganizer::DeleteFile(SyftFile *file) {
-    DeleteFileAction *action = new DeleteFileAction(file);
+void SyftOrganizer::DeleteFile() {
+    DeleteFileAction *action = new DeleteFileAction(CurrentFile(), this);
     m_manager->AddAction(action);
-    //SetFileIndex(m_currentFileIndex + amount);
 }
 
 void SyftOrganizer::RenameDir(SyftDir* dir, QString newName) {
@@ -137,6 +148,14 @@ void SyftOrganizer::RenameDir(SyftDir* dir, QString newName) {
 void SyftOrganizer::RepeatAction() {
     m_manager->RepeatAction(CurrentFile());
 }
+
+void SyftOrganizer::RepeatMovement() {
+    SyftDir* dest = m_lastMovementDest;
+    if (!dest) {
+        return;
+    }
+}
+
 
 void SyftOrganizer::SetCurrentFile(SyftFile *file) {
     QString startFilename = file->FullName();
@@ -163,3 +182,26 @@ SyftDir* SyftOrganizer::NewDir() {
     m_dirs.push_back(newDir);
     return newDir;
 }
+
+void SyftOrganizer::ClearGrab() {
+    m_grabbedFiles.clear();
+    m_logger->LogMessage("G:[0] Cleared");
+}
+
+void SyftOrganizer::ToggleGrab() {
+    SyftFile* file = CurrentFile();
+    bool isAdding = false;
+    if (m_grabbedFiles.contains(file)) {
+        m_grabbedFiles.removeOne(file);
+    } else {
+        isAdding = true;
+        m_grabbedFiles.append(file);
+    }
+    int size = m_grabbedFiles.count();
+    QString message = "G:[" + QString::number(size) + "] files ";
+    message += (isAdding ? "+" : "-") + file->FileName();
+    m_logger->LogMessage(message);
+}
+
+
+

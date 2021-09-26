@@ -195,6 +195,18 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent),
     connect(deleteFileAction, SIGNAL(triggered()),
             this,		      SLOT(DeleteFileSlot()));
 
+    QAction *grabFileAction = new QAction(this);
+    addAction(grabFileAction);
+    grabFileAction->setShortcut(Qt::Key_G);
+    connect(grabFileAction, SIGNAL(triggered()),
+            this,		      SLOT(GrabSlot()));
+
+    QAction *clearGrabAction = new QAction(this);
+    addAction(clearGrabAction);
+    clearGrabAction->setShortcut(QKeySequence("Shift+G"));
+    connect(clearGrabAction, SIGNAL(triggered()),
+            this,		      SLOT(ClearGrabSlot()));
+
 
     // Hotkey Bar 0-9
 
@@ -254,7 +266,7 @@ void MainWindow::TitleLabelEnterSlot() {
         QLineEdit* edit = m_contentViewer->TitleLabel();
         SyftFile* currentFile = m_organizer->CurrentFile();
         QString newFilename = currentFile->Dir() + edit->text();
-        m_organizer->RenameFile(currentFile, newFilename);
+        m_organizer->RenameFile(newFilename);
     }
 }
 
@@ -282,13 +294,7 @@ void MainWindow::keyPressEvent(QKeyEvent *e)
             } else {
                 m_contentViewer->setFocus();
                 SyftDir* selected = m_directoryView->SelectedDir();
-                QString newDir = selected->absolutePath() + QDir::separator();
-                SyftFile* currentFile = m_organizer->CurrentFile();
-                QString filename = currentFile->info()->fileName();
-                QString newFilename = newDir + filename;
-                qDebug() << "Begin Move";
-                m_organizer->MoveFile(currentFile, newFilename);
-                qDebug() << "End Move";
+                m_organizer->Move(selected);
             }
         } else if (m_contentViewer->IsEditingFilename()) {
             m_contentViewer->setFocus();
@@ -360,7 +366,7 @@ void MainWindow::DeleteFileSlot()
     msgBox.exec();
 
     if (msgBox.clickedButton() == yesButton) {
-        m_organizer->DeleteFile(m_organizer->CurrentFile());
+        m_organizer->DeleteFile();
         m_organizer->reloadFiles(false);
     }
 }
@@ -370,6 +376,19 @@ void MainWindow::ZeroActionSlot() {
     l->run();
     qDebug() << "=== OUTPUT ===";
     qDebug() << l->lines()[0];
+}
+
+void MainWindow::GrabSlot() {
+    if (!m_directoryView->hasFocus()) {
+        m_organizer->ToggleGrab();
+    }
+}
+
+
+void MainWindow::ClearGrabSlot() {
+    if (!m_directoryView->hasFocus()) {
+        m_organizer->ClearGrab();
+    }
 }
 
 
