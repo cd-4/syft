@@ -3,11 +3,6 @@ A program for optimal file browsing, renaming, and movement.
 
 With minimal keystrokes, you can rename files, create directories, move files, preview files with Syft.
 
-#### Are you tired of never knowing where you saved that meme? Or needing to sort through hundreds of memes?
-#### Do you hate the tedious process of dragging little file icons to little folder icons?
-#### Do you hate needing to open a new program every time you want to view a file?
-### Syft is here to break you out of that prison.
-
 
 ### Contents
 - [Welcome](#Welcome)
