@@ -12,7 +12,6 @@ DirectoryTableView::DirectoryTableView(QWidget* parent)
       m_organizer(0),
       m_dirIndex(0)
 {
-    setFixedWidth(200);
     QHeaderView* verHeader = new QHeaderView(Qt::Vertical, this);
     setVerticalHeader(verHeader);
     verticalHeader()->setVisible(false);

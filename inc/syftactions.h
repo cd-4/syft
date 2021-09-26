@@ -3,8 +3,8 @@
 
 #include <QString>
 
-#include "syftaction.h"
 #include "syftfile.h"
+#include "syftaction.h"
 #include "syftorganizer.h"
 
 
@@ -15,6 +15,7 @@ public:
                              QString subDirectory);
     virtual int Perform();
     virtual int Revert();
+    virtual QString Message();
 
 private:
     QString m_baseDirectory;
@@ -29,6 +30,7 @@ public:
                           QString newPath);
     virtual int Perform();
     virtual int Revert();
+    virtual QString Message();
 
 private:
     SyftOrganizer* m_organizer;
@@ -43,6 +45,8 @@ public:
     virtual int Perform();
     virtual int Revert();
     QString NewName() { return m_newName; }
+    SyftFile* CurrentFile() { return m_file; }
+    virtual QString Message();
 
 private:
     SyftFile* m_file;
@@ -56,6 +60,7 @@ public:
     RenameDirectoryAction(SyftDir* originalName, QString newName);
     virtual int Perform();
     virtual int Revert();
+    virtual QString Message();
 
 private:
     QString m_newName;
@@ -71,6 +76,7 @@ public:
     virtual int Revert();
     virtual SyftAction* RepeatAction(QString filename);
     virtual bool CanRepeat() { return true; }
+    virtual QString Message();
 
 private:
     SyftOrganizer* m_organizer;
@@ -84,6 +90,7 @@ public:
     DeleteFileAction(SyftFile* file);
     virtual int Perform();
     virtual int Revert();
+    virtual QString Message();
 };
 
 #endif // SYFTACTIONS_H

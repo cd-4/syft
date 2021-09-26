@@ -11,6 +11,8 @@
 #include "contentviewer.h"
 #include "syftorganizer.h"
 #include "syftactionmanager.h"
+#include "syftlogger.h"
+#include "outputwindow.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -22,7 +24,7 @@ class MainWindow : public QMainWindow
     Q_OBJECT
 
 public:
-    MainWindow(QWidget *parent = nullptr);
+    MainWindow(QWidget* parent = nullptr);
     ~MainWindow();
 
     void NextFile();
@@ -33,22 +35,23 @@ public:
 private:
     void ChangeFile(SyftFile* newFile);
 
-    Ui::MainWindow *ui;
+    Ui::MainWindow* ui;
 
     // Main Widgets
-    ContentViewer *m_contentViewer;
-    DirectoryTableView *m_directoryView;
-
-    QWidget *m_centralWidget;
-    QGridLayout *m_layout;
+    ContentViewer* m_contentViewer;
+    DirectoryTableView* m_directoryView;
+    OutputWindow* m_outputWindow;
+    QWidget* m_centralWidget;
+    QGridLayout* m_layout;
 
     // Main Data Management
-    SyftOrganizer *m_organizer;
-    SyftActionManager *m_actionManager;
-    QFileDialog *m_directoryDialog;
+    SyftLogger* m_logger;
+    SyftOrganizer* m_organizer;
+    SyftActionManager* m_actionManager;
+    QFileDialog* m_directoryDialog;
 
     // Subprocesses
-    CommandLineManager *m_commandLineManager;
+    CommandLineManager* m_commandLineManager;
 
 private slots:
     void FileChangedSlot(SyftFile* newFile);

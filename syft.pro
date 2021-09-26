@@ -26,6 +26,7 @@ LIBS += -framework AppKit -framework QuartzCore -framework QTKit
 DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    src/outputwindow.cpp \
     src/pythoncommandline.cpp \
     src/commandline.cpp \
     src/commandlinemanager.cpp \
@@ -39,6 +40,7 @@ SOURCES += \
     src/syftactions.cpp \
     src/syftdir.cpp \
     src/syftfile.cpp \
+    src/syftlogger.cpp \
     src/syftoptions.cpp \
     src/syftorganizer.cpp \
     src/syftsettings.cpp \
@@ -52,6 +54,7 @@ HEADERS += \
     inc/contentviewer.h \
     inc/directorytableview.h \
     inc/fileviewer.h \
+    inc/outputwindow.h \
     inc/pythoncommandline.h \
     inc/mainwindow.h \
     inc/syftaction.h \
@@ -59,6 +62,7 @@ HEADERS += \
     inc/syftactions.h \
     inc/syftdir.h \
     inc/syftfile.h \
+    inc/syftlogger.h \
     inc/syftoptions.h \
     inc/syftorganizer.h \
     inc/syftsettings.h \

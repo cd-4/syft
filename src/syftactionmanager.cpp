@@ -5,11 +5,18 @@
 #include "syftactionmanager.h"
 
 SyftActionManager::SyftActionManager()
+    :QObject(),
+    m_logger(0)
 {
+    m_logger = SyftLogger::GetLogger();
 }
 
 void SyftActionManager::AddAction(SyftAction *action) {
-    action->Perform();
+    if (!action->Perform()) {
+        m_logger->LogMessage(action->Message());
+    } else {
+        m_logger->LogError(action->Message());
+    }
     m_previousActions.push_back(action);
     if (m_undoneActions.size() > 0) {
         m_undoneActions.clear();

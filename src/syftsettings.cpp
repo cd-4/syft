@@ -5,7 +5,6 @@
 
 QString LAST_ACTIVE_DIRECTORY = "last_active_directory";
 
-bool SyftSettings::s_settingsExist = false;
 SyftSettings* SyftSettings::s_settings = 0;
 
 SyftSettings::SyftSettings() : QSettings("syftking", "Syft")
@@ -13,7 +12,7 @@ SyftSettings::SyftSettings() : QSettings("syftking", "Syft")
 }
 
 SyftSettings* SyftSettings::GetSettings() {
-    if (!s_settingsExist) {
+    if (!s_settings) {
         s_settings = new SyftSettings();
     }
     return s_settings;

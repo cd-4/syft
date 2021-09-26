@@ -4,23 +4,26 @@
 #include <QSettings>
 #include <QApplication>
 
+#include "outputwindow.h"
 #include "syftdir.h"
 
 class SyftSettings : public QSettings
 {
-public:
+private:
     SyftSettings();
+
+public:
+    static SyftSettings* GetSettings();
 
     void SetLastDirectory(QString dir);
     QString GetLastDirectory();
 
+public:
+    static SyftSettings* s_settings;
+
 private:
     QApplication* m_application;
 
-public:
-    static SyftSettings* GetSettings();
-    static bool s_settingsExist;
-    static SyftSettings* s_settings;
 };
 
 #endif // SYFTSETTINGS_H

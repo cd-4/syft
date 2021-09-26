@@ -2,9 +2,9 @@
 #include <QDir>
 #include <QDebug>
 
+#include "syftaction.h"
 #include "syftactions.h"
 #include "syftorganizer.h"
-#include "syftaction.h"
 
 // Create a subdirectory in the given base directory
 //		baseDirectory - full path
@@ -30,6 +30,10 @@ int CreateSubdirectoryAction::Revert()
     return 0;
 }
 
+QString CreateSubdirectoryAction::Message() {
+    return "N: " + SyftDir(m_subDirectory).basename();
+}
+
 // Move to a new directory
 // 		originalPath - full path of start
 // 		newPath - full path of destination
@@ -51,6 +55,10 @@ int ChangeDirectoryAction::Revert() {
     return 0;
 }
 
+QString ChangeDirectoryAction::Message() {
+    return "D: " + SyftDir(m_newPath).basename() + QDir::separator();
+}
+
 // Rneame a file
 // 		originalName - full path of original file
 // 		newName - full path of new file
@@ -60,9 +68,6 @@ RenameFileAction::RenameFileAction(SyftFile* file,
     m_originalName(file->fileName()),
     m_newName(newName)
 {
-    qDebug() << "-----";
-    qDebug() << "Old: " << m_originalName;
-    qDebug() << "New: " << m_newName;
 }
 
 int RenameFileAction::Perform() {
@@ -75,14 +80,18 @@ int RenameFileAction::Revert() {
     return 0;
 }
 
+QString RenameFileAction::Message() {
+    return "R:" + SyftFile(m_originalName).FileName() + " -> " + SyftFile(m_newName).FileName();
+}
+
 // Rename Directory
 // 		originalName - full path etc
 // 		newName - full path etc
 RenameDirectoryAction::RenameDirectoryAction(SyftDir* dir,
                                              QString newName):
+    m_newName(newName),
     m_dir(dir),
-    m_originalName(dir->path()),
-    m_newName(newName)
+    m_originalName(dir->path())
 {
 }
 
@@ -98,14 +107,17 @@ int RenameDirectoryAction::Revert() {
     return 0;
 }
 
+QString RenameDirectoryAction::Message() {
+    return "R:" + SyftDir(m_originalName).basename() + QDir::separator() + " to " + QDir(m_newName).path() + QDir::separator();
+}
+
 // Move File
 //    both full paths
 MoveFileAction::MoveFileAction(SyftFile* file,
                                QString newName,
                                SyftOrganizer* organizer)
     :RenameFileAction(file, newName),
-     m_organizer(organizer),
-     m_file(file)
+     m_organizer(organizer)
 {}
 
 int MoveFileAction::Perform() {
@@ -120,6 +132,14 @@ int MoveFileAction::Revert() {
     m_organizer->reloadFiles(false);
     m_organizer->SetCurrentFile(m_file);
     return output;
+}
+
+QString MoveFileAction::Message() {
+    QString newName = NewName();
+    QString dirName = newName.left(newName.lastIndexOf(QDir::separator()));
+    int lastInd = dirName.lastIndexOf(QDir::separator()) + 1;
+    QString baseName = dirName.right(dirName.size() - lastInd);
+    return "M:" + CurrentFile()->FileName() + " -> " + baseName + QDir::separator();
 }
 
 SyftAction* MoveFileAction::RepeatAction(QString filename) {
@@ -168,5 +188,10 @@ int DeleteFileAction::Revert() {
     qDebug() << out << "Failure";
     return 1;
     */
+    return 0;
+}
+
+QString DeleteFileAction::Message() {
+    return "D:" + SyftFile(m_fileName).FileName();
 }
 

@@ -10,6 +10,7 @@
 #include "syftactions.h"
 #include "syftorganizer.h"
 #include "commandline.h"
+#include "outputwindow.h"
 
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
@@ -24,6 +25,8 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent),
     m_commandLineManager(0)
 {
     ui->setupUi(this);
+
+    m_logger = SyftLogger::GetLogger();
 
     // Create Action Manager
     m_actionManager = new SyftActionManager();
@@ -45,7 +48,8 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent),
 
     // Create Content Viewer
     m_contentViewer = new ContentViewer(m_centralWidget);
-    m_layout->addWidget(m_contentViewer, 0, 1, 1, 1);
+    //m_layout->addWidget(q, row, colum, rowspan, columnspan);
+    m_layout->addWidget(m_contentViewer, 0, 1, 2, 1);
 
     m_directoryView = new DirectoryTableView(this);
     m_directoryView->SetOrganizer(m_organizer);
@@ -54,8 +58,13 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent),
 
     m_layout->addWidget(m_directoryView, 0, 0, 1, 1);
 
+    m_outputWindow = new OutputWindow(this);
+    m_layout->addWidget(m_outputWindow, 1, 0, 1, 1);
 
-    m_directoryView->resize(100, m_directoryView->width());
+    // TODO: Make this movable
+    int SIDE_BAR_WIDTH = 250;
+    m_directoryView->setFixedWidth(SIDE_BAR_WIDTH);
+    m_outputWindow->setFixedWidth(SIDE_BAR_WIDTH);
 
     // Set Up Signals
     connect(m_organizer, 	SIGNAL(FileChangedSignal(SyftFile*)),
@@ -70,6 +79,9 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent),
 
     connect(m_directoryDialog, SIGNAL(urlSelected(const QUrl&)),
             this,			   SLOT(DirectorySelectedSlot(const QUrl&)));
+
+    connect(m_logger, 	 	SIGNAL(LogLine(QString)),
+            m_outputWindow, SLOT(WriteContent(QString)));
 
     m_contentViewer->SetCurrentFile(m_organizer->CurrentFile());
     m_contentViewer->setFocus();

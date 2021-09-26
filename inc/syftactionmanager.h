@@ -5,6 +5,7 @@
 
 #include <QObject>
 
+#include "syftlogger.h"
 #include "syftfile.h"
 #include "syftaction.h"
 
@@ -25,6 +26,7 @@ signals:
 private:
     std::list<SyftAction*> m_previousActions;
     std::list<SyftAction*> m_undoneActions;
+    SyftLogger* m_logger;
 };
 
 #endif // SYFTACTIONMANAGER_H

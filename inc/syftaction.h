@@ -6,8 +6,9 @@
 class SyftAction
 {
 public:
-    virtual int Perform() = 0;
-    virtual int Revert() = 0;
+    virtual QString Message() { return ""; }
+    virtual int Perform() { return 0; }
+    virtual int Revert() { return 0; }
     virtual bool CanRepeat() { return false; }
     virtual SyftAction* RepeatAction(QString filename) { return 0; }
 };
