@@ -41,8 +41,7 @@ void SyftOrganizer::ChangeDirectory(SyftDir* newDir)
     if (!files) {
         return;
     }
-    //m_parent->setWindowTitle("Syft -- " + newDir->path());
-    m_parent->setWindowTitle("Syft -- ~/Path/To/Directory/");
+    m_parent->setWindowTitle("Syft -- " + newDir->path());
     m_currentDirectory = newDir;
     reloadFiles(true);
     SyftSettings::GetSettings()->SetLastDirectory(m_currentDirectory->path());
@@ -124,7 +123,7 @@ void SyftOrganizer::Move(SyftDir* dir) {
     m_lastMovementDest = new SyftDir(dir->path());
     m_lastMovementDest->cdUp();
 
-    if (m_grabbedFiles.size() > 0) {
+    if (false) {//{m_grabbedFiles.size() > 0) {
         MoveGroupAction* action = new MoveGroupAction(m_grabbedFiles, m_lastMovementDest, this);
         m_manager->AddAction(action);
     } else {
