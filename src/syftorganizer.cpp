@@ -39,7 +39,8 @@ void SyftOrganizer::ChangeDirectory(SyftDir* newDir)
     if (!files) {
         return;
     }
-    m_parent->setWindowTitle("Syft -- " + newDir->path());
+    //m_parent->setWindowTitle("Syft -- " + newDir->path());
+    m_parent->setWindowTitle("Syft -- ~/Path/To/Directory/");
     m_currentDirectory = newDir;
     reloadFiles(true);
     SyftSettings::GetSettings()->SetLastDirectory(m_currentDirectory->path());
