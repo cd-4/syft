@@ -32,6 +32,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent),
     m_organizer = new SyftOrganizer(m_actionManager, this);
     m_commandLineManager = new CommandLineManager(m_organizer);
 
+    // Change Directory Dialog
     m_directoryDialog = new QFileDialog(this);
     m_directoryDialog->setFileMode(QFileDialog::Directory);
     m_directoryDialog->setDirectory(m_organizer->CurrentDirectory()->path());
@@ -51,24 +52,17 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent),
     m_directoryView->show();
     m_directoryView->setEditTriggers(QAbstractItemView::NoEditTriggers);
 
-    //QHeaderView* header = m_directoryView->horizontalHeader();
-    //header->setSectionResizeMode(QHeaderView::Stretch);
-
-    //m_directoryView->setStyleSheet("QHeaderView::section { background-color:red }");
-
     m_layout->addWidget(m_directoryView, 0, 0, 1, 1);
+
+
     m_directoryView->resize(100, m_directoryView->width());
-
-
-    // Bullshit for testing poirposes
-    SyftFile* file = new SyftFile("/Users/chaz/Desktop/TestDir/dark_truth_about_china.png");
-    m_contentViewer->show();
-    m_contentViewer->SetCurrentFile(file);
-    m_contentViewer->setFocus();
 
     // Set Up Signals
     connect(m_organizer, 	SIGNAL(FileChangedSignal(SyftFile*)),
             this, 			SLOT(FileChangedSlot(SyftFile*)));
+    connect(m_organizer, SIGNAL(DirectoryChangedSignal(SyftDir*)),
+            m_directoryView,   SLOT(DirectoryChangedSlot(SyftDir*)));
+
     connect(m_contentViewer->TitleLabel(), SIGNAL(returnPressed()),
             this,  						   SLOT(TitleLabelEnterSlot()));
     connect(m_actionManager,     SIGNAL(RefreshFileTitle()),
@@ -77,8 +71,8 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent),
     connect(m_directoryDialog, SIGNAL(urlSelected(const QUrl&)),
             this,			   SLOT(DirectorySelectedSlot(const QUrl&)));
 
-    connect(m_organizer, SIGNAL(DirectoryChangedSignal(SyftDir*)),
-            m_directoryView,   SLOT(DirectoryChangedSlot(SyftDir*)));
+    m_contentViewer->SetCurrentFile(m_organizer->CurrentFile());
+    m_contentViewer->setFocus();
 
     QAction *nextFileAction = new QAction(this);
     addAction(nextFileAction);
