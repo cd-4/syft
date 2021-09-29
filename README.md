@@ -38,7 +38,7 @@ To do so, follow these steps:
   - For me, I could fix this by looking in my Build Environment in Qt Creator, and choosing environment variables
   - The value QTDIR should be pre-populated. Simply set the QT_PLUGIN_PATH to "$QTDIR/plugins" (not actually $QTDIR but the full path)
 
-As far as building with `qmake` you're on your own. I'd recommend just using qt creator to build and editing where you like to do your editing.
+As far as building with `qmake`/`cmake`/`make` you're on your own. I'd recommend just using qt creator to build and editing where you like to do your editing.
 If you are able to figure it out, feel free to fix this area of the `README` to help others with that.
 
 # Startup
